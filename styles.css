@@ -1,3 +1,4 @@
+/* Imported fonts */
 @font-face {
   font-family : "timesnew";
   src: url("fonts/times.ttf") format("truetype")
@@ -15,10 +16,12 @@
   src: url("fonts/zeusborne.otf") format("truetype")
 }
 
+/* Structure of the page */
 body {
   max-width: 1200px;
-  font-family: timesnew;
-  background-color: #000000;
+  font-family: retro;
+
+  background: #000000;
   color: #ffffff;
   margin: 80px;
   margin-left: 80px auto;
@@ -44,7 +47,7 @@ header a {
 }
 
 header nav {
-  color: #ff0000;
+  color: #ffffff;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -52,8 +55,18 @@ header nav {
   gap: 20px;
 }
 
-footer a {
+/* Links */
+a {
   color: #ff0000;
+  text-decoration: none;
 }
 
-/*# sourceMappingURL=styles.css.map */
+a:hover {
+  color: #fff000;
+  text-decoration:
+}
+
+/* SPECIAL CLASSES */
+.container {
+  display = flex
+}

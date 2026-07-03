@@ -4,7 +4,7 @@ let fams = [
   "metal",
   "authoritarian",
 ]
-fams = fams.concat(fams.concat(fams.concat(["timesnew"])))
+fams = fams.concat(fams.concat(fams.concat(["retro"])))
 
 document.addEventListener("DOMContentLoaded", () => {
   let i = 0
