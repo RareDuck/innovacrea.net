@@ -1,0 +1,24 @@
+@font-face {
+  font-family : "timesnew";
+  src: url("fonts/times.ttf") format("truetype")
+}
+@font-face {
+  font-family : "retro";
+  src: url("fonts/bytebounce.ttf") format("truetype")
+}
+@font-face {
+  font-family : "metal";
+  src: url("fonts/thrashburn.otf") format("truetype")
+}
+@font-face {
+  font-family : "authoritarian";
+  src: url("fonts/zeusborne.otf") format("truetype")
+}
+
+body {
+  background-color:   #000000;
+
+  color:              #FFFFFF;
+  font-family :         "timesnew";
+  text-align:           center
+}
