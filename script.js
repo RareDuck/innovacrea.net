@@ -326,7 +326,7 @@ if (cursor && isFinePointer) {
     if (
       target instanceof Element &&
       target.closest(
-        "a, button, .project, .reference-row, .resource-card, .reflection-link"
+        "a, button, .spectrum-row, .reference-row, .resource-card, .reflection-link"
           + ", .personal-panel"
       )
     ) {
@@ -340,7 +340,7 @@ if (cursor && isFinePointer) {
     if (
       target instanceof Element &&
       target.closest(
-        "a, button, .project, .reference-row, .resource-card, .reflection-link"
+        "a, button, .spectrum-row, .reference-row, .resource-card, .reflection-link"
           + ", .personal-panel"
       )
     ) {
@@ -514,36 +514,210 @@ if (
 
 
 /* =========================================================
-   PROJECT VISUAL POINTER
+   PROJECT SPECTRUM
 ========================================================= */
 
-const projectVisuals = document.querySelectorAll(
-  ".project__visual"
-);
+const spectrumProjects = [
+  {
+    title: "Levels House",
+    value: 0,
+    type: "Exercise",
+    year: "2023",
+    text:
+      "Ejercicio académico de geometría descriptiva, planimetría y axonometría.",
+    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
+  },
+  {
+    title: "Descriptive Geometry",
+    value: 0,
+    type: "Exercise",
+    year: "2023",
+    text:
+      "Ejercicio académico de intersecciones, proyecciones y superficies.",
+    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
+  },
+  {
+    title: "Ether Art Gallery",
+    value: 0,
+    type: "Architecture",
+    year: "2024",
+    text:
+      "Proyecto arquitectónico centrado en transformación, recorrido y espacio expositivo.",
+    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
+  },
+  {
+    title: "El Chiringuito y el Mar",
+    value: 5,
+    type: "Architecture / system",
+    year: "2025",
+    text:
+      "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
+    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
+  }
+];
 
-if (isFinePointer && !reducedMotion) {
-  projectVisuals.forEach((visual) => {
-    visual.addEventListener("mousemove", (event) => {
-      const rect = visual.getBoundingClientRect();
+const spectrumContainer =
+  document.querySelector("[data-project-spectrum]");
 
-      const x =
-        ((event.clientX - rect.left) /
-          rect.width) *
-        100;
+const spectrumReadoutNumber =
+  document.querySelector("#spectrum-readout-number");
 
-      const y =
-        ((event.clientY - rect.top) /
-          rect.height) *
-        100;
+const spectrumReadoutTitle =
+  document.querySelector("#spectrum-readout-title");
 
-      visual.style.backgroundPosition =
-        `${x * 0.04 + 48}% ${y * 0.04 + 48}%`;
-    });
+const spectrumReadoutCopy =
+  document.querySelector("#spectrum-readout-copy");
 
-    visual.addEventListener("mouseleave", () => {
-      visual.style.backgroundPosition = "center";
-    });
+const spectrumReadoutAxis =
+  document.querySelector("#spectrum-readout-axis");
+
+const spectrumReadoutType =
+  document.querySelector("#spectrum-readout-type");
+
+const spectrumHud =
+  document.querySelector(".spectrum-hud");
+
+function formatSpectrumNumber(index) {
+  return `W / ${String(index + 1).padStart(3, "0")}`;
+}
+
+function setActiveSpectrumProject(project, index) {
+  const architecture = 100 - project.value;
+
+  document.querySelectorAll(".spectrum-row").forEach((row) => {
+    row.classList.toggle(
+      "is-active",
+      Number(row.dataset.spectrumIndex) === index
+    );
   });
+
+  if (spectrumReadoutNumber) {
+    spectrumReadoutNumber.textContent = formatSpectrumNumber(index);
+  }
+
+  if (spectrumReadoutTitle) {
+    spectrumReadoutTitle.textContent = project.title;
+  }
+
+  if (spectrumReadoutCopy) {
+    spectrumReadoutCopy.textContent = project.text;
+  }
+
+  if (spectrumReadoutAxis) {
+    spectrumReadoutAxis.textContent =
+      `${project.value}% software / ${architecture}% arquitectura`;
+  }
+
+  if (spectrumReadoutType) {
+    spectrumReadoutType.textContent = project.type;
+  }
+}
+
+function renderProjectSpectrum() {
+  if (!spectrumContainer) {
+    return;
+  }
+
+  spectrumContainer.innerHTML = "";
+
+  spectrumProjects.forEach((project, index) => {
+    const architecture = 100 - project.value;
+    const row = document.createElement("article");
+
+    row.className = "spectrum-row";
+    row.dataset.spectrumIndex = index;
+    row.style.setProperty("--position", project.value);
+    row.tabIndex = 0;
+
+    row.innerHTML = `
+      <a
+        class="spectrum-row__number"
+        href="${escapeHTML(project.url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${formatSpectrumNumber(index)}
+      </a>
+
+      <h3 class="spectrum-row__title">
+        <a
+          href="${escapeHTML(project.url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>${escapeHTML(project.title)}</span>
+        </a>
+      </h3>
+
+      <div class="spectrum-row__track-wrap">
+        <div class="spectrum-row__track" aria-hidden="true">
+          <span class="spectrum-row__marker"></span>
+        </div>
+      </div>
+
+      <div class="spectrum-row__data">
+        <strong>${project.value}% / ${architecture}%</strong>
+        <span>${escapeHTML(project.type)} / ${escapeHTML(project.year)}</span>
+      </div>
+    `;
+
+    row.addEventListener("mouseenter", () => {
+      setActiveSpectrumProject(project, index);
+    });
+
+    row.addEventListener("focus", () => {
+      setActiveSpectrumProject(project, index);
+    });
+
+    spectrumContainer.appendChild(row);
+  });
+
+  setActiveSpectrumProject(spectrumProjects[0], 0);
+}
+
+renderProjectSpectrum();
+
+function updateSpectrumHudPosition() {
+  if (!spectrumContainer || !spectrumHud) {
+    return;
+  }
+
+  const board = spectrumContainer.closest(".spectrum-board");
+
+  if (!board) {
+    return;
+  }
+
+  const boardRect = board.getBoundingClientRect();
+  const projectsRect = spectrumContainer.getBoundingClientRect();
+  const hudHeight = spectrumHud.offsetHeight;
+  const shouldFix =
+    projectsRect.top <= window.innerHeight - hudHeight &&
+    boardRect.bottom > window.innerHeight;
+
+  spectrumHud.classList.toggle("is-fixed", shouldFix);
+
+  if (shouldFix) {
+    spectrumHud.style.setProperty(
+      "--spectrum-hud-left",
+      `${boardRect.left}px`
+    );
+
+    spectrumHud.style.setProperty(
+      "--spectrum-hud-width",
+      `${boardRect.width}px`
+    );
+  }
+}
+
+if (spectrumHud) {
+  updateSpectrumHudPosition();
+
+  window.addEventListener("scroll", updateSpectrumHudPosition, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateSpectrumHudPosition);
 }
 
 

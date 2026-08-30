@@ -62,23 +62,18 @@
         Inicio
       </a>
 
-      <a href="#arquitectura" class="nav-link">
+      <a href="#proyectos" class="nav-link">
         <span>01</span>
-        Arquitectura
-      </a>
-
-      <a href="#programacion" class="nav-link">
-        <span>02</span>
-        Programación
+        Proyectos
       </a>
 
       <a href="#personal" class="nav-link">
-        <span>03</span>
+        <span>02</span>
         Personal
       </a>
 
       <a href="#contacto" class="nav-link">
-        <span>04</span>
+        <span>03</span>
         Contacto
       </a>
     </nav>
@@ -166,294 +161,85 @@
         <span class="diagram-label diagram-label--c">45°</span>
       </div>
 
-      <a class="scroll-indicator magnetic" href="#arquitectura">
+      <a class="scroll-indicator magnetic" href="#proyectos">
         <span>SCROLL / EXPLORE</span>
         <span class="scroll-indicator__line"></span>
       </a>
     </section>
 
     <!-- =========================================================
-         ARCHITECTURE
+         PROJECT SPECTRUM
     ========================================================== -->
-    <section class="projects-section section" id="arquitectura">
-      <header class="section-heading reveal">
+    <section class="project-spectrum section" id="proyectos">
+      <header class="section-heading section-heading--right reveal">
         <div class="section-heading__number">01</div>
 
         <div>
-          <p class="eyebrow">SELECTED WORK / BUILT + UNBUILT</p>
+          <p class="eyebrow">WORK INDEX / ARCHITECTURE × COMPUTATION</p>
 
           <h2>
-            ARQUI<span>TECTURA</span>
+            PROYECTOS
           </h2>
         </div>
 
         <p class="section-heading__description">
-          Espacio, representación, construcción y
-          experimentación material.
+          Una clasificación de trabajos y ejercicios según su posición
+          entre arquitectura, representación y software.
         </p>
       </header>
 
-      <div class="architecture-grid">
-        <article class="project project--wide reveal">
-          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Levels House">
-            <div
-              class="project__visual project__visual--image"
-              style="--project-image: url('assets/architecture/levels-house.jpg');"
-            >
-              <div class="project__coordinates">
-                <span>AXO.01</span>
-                <span>1:100</span>
-              </div>
+      <div class="spectrum-layout">
+        <aside class="spectrum-aside reveal">
+          <h3>Project index</h3>
+          <p>
+            Los trabajos no se separan por disciplina: se proyectan sobre un
+            eje común.
+          </p>
+        </aside>
+
+        <div class="spectrum-board reveal">
+          <div class="spectrum-header" aria-hidden="true">
+            <span>ID</span>
+            <span>Proyecto</span>
+            <span>Campo espectral</span>
+            <span>Lectura</span>
+          </div>
+
+          <div class="spectrum-hud">
+            <div class="spectrum-axis" aria-hidden="true">
+              <span class="spectrum-axis__start">Arquitectura</span>
+              <span class="spectrum-axis__line"></span>
+              <span class="spectrum-axis__end">Software</span>
             </div>
 
-            <div class="project__information">
-              <span class="project__number">A / 001</span>
+            <section class="spectrum-detail" aria-live="polite">
+              <article class="spectrum-readout">
+                <div class="spectrum-readout__number" id="spectrum-readout-number">
+                  W / 001
+                </div>
 
-              <div>
-                <h3>LEVELS HOUSE</h3>
-                <p>
-                  Geometría descriptiva /
-                  planimetría /
-                  axonometría
-                </p>
-              </div>
+                <div>
+                  <h3 id="spectrum-readout-title">Levels House</h3>
+                  <p id="spectrum-readout-copy">
+                    Ejercicio académico de geometría descriptiva, planimetría
+                    y axonometría.
+                  </p>
 
-              <span class="project__year">2023</span>
-            </div>
-          </a>
-        </article>
+                  <div class="spectrum-readout__meta">
+                    <span id="spectrum-readout-axis">0% software / 100% arquitectura</span>
+                    <span id="spectrum-readout-type">Exercise</span>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </div>
 
-        <article class="project reveal">
-          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Geometría Descriptiva">
-            <div
-              class="project__visual project__visual--image project__visual--light"
-              style="--project-image: url('assets/architecture/descriptive-geometry.jpg');"
-            >
-              <div class="project__coordinates project__coordinates--dark">
-                <span>DG.02</span>
-                <span>PROJECTION</span>
-              </div>
-            </div>
-
-            <div class="project__information">
-              <span class="project__number">A / 002</span>
-
-              <div>
-                <h3>DESCRIPTIVE GEOMETRY</h3>
-                <p>
-                  Intersecciones /
-                  proyecciones /
-                  superficies
-                </p>
-              </div>
-
-              <span class="project__year">2024</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="project reveal">
-          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Ether Gallery">
-            <div
-              class="project__visual project__visual--image"
-              style="--project-image: url('assets/architecture/ether-gallery.jpg');"
-            >
-              <div class="project__coordinates">
-                <span>AXO.04</span>
-                <span>TRANSFORMATION</span>
-              </div>
-            </div>
-
-            <div class="project__information">
-              <span class="project__number">A / 003</span>
-
-              <div>
-                <h3>ETHER ART GALLERY</h3>
-                <p>
-                  Transformación /
-                  recorrido /
-                  espacio expositivo
-                </p>
-              </div>
-
-              <span class="project__year">2024</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="project project--wide reveal">
-          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir El Chiringuito y el Mar">
-            <div
-              class="project__visual project__visual--ocean project__visual--image"
-              style="--project-image: url('assets/architecture/chiringuito.jpg');"
-            >
-              <div class="project__coordinates">
-                <span>SYS.09</span>
-                <span>MAR / RIBEIRA</span>
-              </div>
-            </div>
-
-            <div class="project__information">
-              <span class="project__number">A / 004</span>
-
-              <div>
-                <h3>EL CHIRINGUITO Y EL MAR</h3>
-                <p>
-                  Sistema modular /
-                  infraestructura flotante /
-                  paisaje
-                </p>
-              </div>
-
-              <span class="project__year">2025</span>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <!-- =========================================================
-         PROGRAMMING
-    ========================================================== -->
-    <section class="software-section section" id="programacion">
-      <header class="section-heading reveal">
-        <div class="section-heading__number">02</div>
-
-        <div>
-          <p class="eyebrow">TOOLS / SOFTWARE / PROTOTYPES</p>
-
-          <h2>
-            PROGRA<span>MACIÓN</span>
-          </h2>
+          <section
+            class="spectrum-projects"
+            data-project-spectrum
+            aria-label="Lista de trabajos clasificados"
+          ></section>
         </div>
-
-        <p class="section-heading__description">
-          Herramientas y experimentos donde código,
-          diseño y geometría se encuentran.
-        </p>
-      </header>
-
-      <div class="software-list">
-        <article class="software-project reveal">
-          <div class="software-project__index">
-            P.001
-          </div>
-
-          <div class="software-project__body">
-            <div class="software-project__head">
-              <h3>GENERATIVE PLAN SYSTEM</h3>
-
-              <span class="software-project__status">
-                EXPERIMENT
-              </span>
-            </div>
-
-            <p>
-              Generador procedural de distribuciones y
-              diagramas espaciales basado en reglas geométricas.
-            </p>
-
-            <div class="tech-tags">
-              <span>JAVASCRIPT</span>
-              <span>SVG</span>
-              <span>GEOMETRY</span>
-            </div>
-          </div>
-
-          <div class="software-project__preview preview-grid" aria-hidden="true">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <span></span>
-          </div>
-
-          <a class="software-project__action magnetic" href="#">
-            ↗
-            <span>OPEN</span>
-          </a>
-        </article>
-
-        <article class="software-project reveal">
-          <div class="software-project__index">
-            P.002
-          </div>
-
-          <div class="software-project__body">
-            <div class="software-project__head">
-              <h3>SECTION MACHINE</h3>
-
-              <span class="software-project__status software-project__status--blue">
-                TOOL
-              </span>
-            </div>
-
-            <p>
-              Interfaz experimental para estudiar secciones,
-              perfiles y relaciones espaciales en tiempo real.
-            </p>
-
-            <div class="tech-tags">
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>CANVAS API</span>
-            </div>
-          </div>
-
-          <div class="software-project__preview preview-section" aria-hidden="true">
-            <svg viewBox="0 0 300 130">
-              <path d="M0,88 C34,88 45,35 78,35 C110,35 102,96 145,96 C180,96 182,52 213,52 C252,52 251,90 300,90"/>
-              <line x1="0" y1="105" x2="300" y2="105"/>
-              <line x1="55" y1="15" x2="55" y2="120"/>
-              <line x1="232" y1="15" x2="232" y2="120"/>
-            </svg>
-          </div>
-
-          <a class="software-project__action magnetic" href="#">
-            ↗
-            <span>OPEN</span>
-          </a>
-        </article>
-
-        <article class="software-project reveal">
-          <div class="software-project__index">
-            P.003
-          </div>
-
-          <div class="software-project__body">
-            <div class="software-project__head">
-              <h3>SPATIAL INDEX</h3>
-
-              <span class="software-project__status">
-                WEB
-              </span>
-            </div>
-
-            <p>
-              Archivo digital para clasificar referencias
-              arquitectónicas mediante relaciones y etiquetas.
-            </p>
-
-            <div class="tech-tags">
-              <span>JAVASCRIPT</span>
-              <span>LOCAL STORAGE</span>
-              <span>DATA</span>
-            </div>
-          </div>
-
-          <div class="software-project__preview preview-data" aria-hidden="true">
-            <span>01 01101</span>
-            <span>02 10011</span>
-            <span>03 11010</span>
-            <span>04 00101</span>
-            <span>05 10110</span>
-          </div>
-
-          <a class="software-project__action magnetic" href="#">
-            ↗
-            <span>OPEN</span>
-          </a>
-        </article>
       </div>
     </section>
 
@@ -462,7 +248,7 @@
     ========================================================== -->
     <section class="personal-section section" id="personal">
       <header class="section-heading reveal">
-        <div class="section-heading__number">03</div>
+        <div class="section-heading__number">02</div>
 
         <div>
           <p class="eyebrow">NOTES / REFERENCES / MATERIAL</p>
@@ -496,7 +282,7 @@
         <div class="personal-board__main">
           <section class="personal-panel personal-panel--reflections reveal" aria-labelledby="personal-reflections-title">
             <div class="personal-panel__header">
-              <span>03.1</span>
+              <span>02.1</span>
               <h3 id="personal-reflections-title">Reflexiones</h3>
             </div>
 
@@ -521,7 +307,7 @@
 
           <section class="personal-panel personal-panel--references reveal" aria-labelledby="personal-references-title">
             <div class="personal-panel__header">
-              <span>03.2</span>
+              <span>02.2</span>
               <h3 id="personal-references-title">Referencias</h3>
             </div>
 
@@ -562,7 +348,7 @@
 
           <section class="personal-panel personal-panel--resources reveal" aria-labelledby="personal-resources-title">
             <div class="personal-panel__header">
-              <span>03.3</span>
+              <span>02.3</span>
               <h3 id="personal-resources-title">Recursos</h3>
             </div>
 
@@ -625,7 +411,7 @@
       <div class="contact-section__grid" aria-hidden="true"></div>
 
       <div class="section-marker reveal">
-        <span>04</span>
+        <span>03</span>
         <span>CONTACT / COLLABORATION</span>
       </div>
 
