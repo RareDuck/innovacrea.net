@@ -1,44 +1,820 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <title>Angel's Porfolio - Recursos</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Portfolio de arquitectura, software, geometría y diseño computacional."
+  >
+
+  <meta name="theme-color" content="#080808">
+
+  <title>Ángel Yagüe — Architecture × Computation</title>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <header>
-      <div style="position: relative;height:10vh" class="container">
-        <h1 id="camaleon">PORTFOLIO</h1>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__cross cursor__cross--x"></span>
+    <span class="cursor__cross cursor__cross--y"></span>
+    <span class="cursor__dot"></span>
+  </div>
+
+  <div class="coordinates" aria-hidden="true">
+    <span id="coord-x">X 0000</span>
+    <span id="coord-y">Y 0000</span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand magnetic" href="#inicio" aria-label="Ir al inicio">
+      <span class="brand__mark">AY</span>
+
+      <span class="brand__text">
+        ARCHITECTURE
+        <span>/</span>
+        COMPUTATION
+      </span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir navegación"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" id="main-navigation">
+      <a href="#inicio" class="nav-link is-active">
+        <span>00</span>
+        Inicio
+      </a>
+
+      <a href="#arquitectura" class="nav-link">
+        <span>01</span>
+        Arquitectura
+      </a>
+
+      <a href="#programacion" class="nav-link">
+        <span>02</span>
+        Programación
+      </a>
+
+      <a href="#referencias" class="nav-link">
+        <span>03</span>
+        Referencias
+      </a>
+
+      <a href="#reflexiones" class="nav-link">
+        <span>04</span>
+        Reflexiones
+      </a>
+
+      <a href="#recursos" class="nav-link">
+        <span>05</span>
+        Recursos
+      </a>
+
+      <a href="#contacto" class="nav-link">
+        <span>06</span>
+        Contacto
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+    <section class="hero section" id="inicio">
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero__meta">
+        <span>MADRID / ESP</span>
+        <span>40.4168° N</span>
+        <span>03.7038° W</span>
       </div>
-        <h2>PRÓXIMAMENTE</h2>
 
-        <!--DIFERENTES APARTADOS DE LA PÁGINA-->
-        <nav>
-          <a href="index.html">INICIO</a>   
-          <a href="page_sections/publicaciones.html">REFERENCIAS</a>
-          <a href="page_sections/arquitectura.html">ARQUITECTURA</a>
-          <a href="page_sections/programacion.html">PROGRAMACIÓN</a>
-          <a href="page_sections/recursos.html">RECURSOS</a>
-        </nav>
-    </header>
-    <!--me gustaría poder poner aquí contenido según el apartado seleccionado-->
-    <main>
-        <!--feed de publicaciones-->
-    </main>
+      <div class="hero__index">
+        <span>PORTFOLIO</span>
+        <span>2026</span>
+      </div>
 
-    <footer>
-      <div class="container">
-        <p>
-            Web aún en construcción, Actual portfolio: 
-            <a href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf">PDF</a>
+      <div class="hero__content">
+        <p class="eyebrow reveal">
+          ESTUDIANTE DE ARQUITECTURA × SOFTWARE
+        </p>
+
+        <h1
+          class="hero-title reveal"
+          data-scramble="ÁNGEL YAGÜE"
+        >
+          <span class="hero-title__main">ÁNGEL</span>
+          <span class="hero-title__main hero-title__main--offset">YAGÜE</span>
+        </h1>
+
+        <div class="hero-statement reveal">
+          <p>
+            Diseño
+            <strong>espacios</strong>,
+            sistemas y geometrías entre
+            <span class="accent-red">materia</span>
+            y
+            <span class="accent-blue">código</span>.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-diagram reveal" aria-hidden="true">
+        <svg viewBox="0 0 520 520">
+          <g class="diagram-grid">
+            <line x1="0" y1="130" x2="520" y2="130"/>
+            <line x1="0" y1="260" x2="520" y2="260"/>
+            <line x1="0" y1="390" x2="520" y2="390"/>
+
+            <line x1="130" y1="0" x2="130" y2="520"/>
+            <line x1="260" y1="0" x2="260" y2="520"/>
+            <line x1="390" y1="0" x2="390" y2="520"/>
+          </g>
+
+          <g class="diagram-main">
+            <circle cx="260" cy="260" r="182"/>
+            <circle cx="260" cy="260" r="122"/>
+            <circle cx="260" cy="260" r="43"/>
+
+            <path d="M78 260 L260 78 L442 260 L260 442 Z"/>
+            <path d="M130 390 L390 130"/>
+            <path d="M130 130 L390 390"/>
+          </g>
+
+          <g class="diagram-accent">
+            <circle cx="260" cy="78" r="7"/>
+            <circle cx="442" cy="260" r="7"/>
+            <path d="M260 78 A182 182 0 0 1 442 260"/>
+          </g>
+
+          <g class="diagram-blue">
+            <path d="M260 260 L390 130"/>
+            <circle cx="390" cy="130" r="9"/>
+          </g>
+        </svg>
+
+        <span class="diagram-label diagram-label--a">A.01</span>
+        <span class="diagram-label diagram-label--b">R=182</span>
+        <span class="diagram-label diagram-label--c">45°</span>
+      </div>
+
+      <a class="scroll-indicator magnetic" href="#perfil">
+        <span>SCROLL / EXPLORE</span>
+        <span class="scroll-indicator__line"></span>
+      </a>
+    </section>
+
+    <!-- =========================================================
+         PROFILE / MANIFESTO
+    ========================================================== -->
+    <section class="manifesto section" id="perfil">
+      <div class="section-marker reveal">
+        <span>00.1</span>
+        <span>PROFILE / STATEMENT</span>
+      </div>
+
+      <div class="manifesto__layout">
+        <div class="manifesto__technical reveal">
+          <span>SUBJECT</span>
+          <strong>SPACE</strong>
+
+          <span>PROCESS</span>
+          <strong>ITERATION</strong>
+
+          <span>MEDIUM</span>
+          <strong>MATTER / CODE</strong>
+
+          <span>STATUS</span>
+          <strong class="status-online">IN DEVELOPMENT</strong>
+        </div>
+
+        <p class="manifesto__copy reveal">
+          Me interesa la arquitectura como
+          <span>construcción de sistemas</span>
+          y el software como
+          <span>construcción de espacios.</span>
+          Trabajo entre representación, geometría,
+          interfaces, prototipos y procesos computacionales.
         </p>
       </div>
-      <div class="container">
-        angelyague.a@gmail.com   
-        <a href="https://www.instagram.com/architecture.ay/">instagram</a> 
-        <a href="https://www.linkedin.com/in/%C3%A1ngel-yag%C3%BCe-arquitectura/">linkedin</a>  
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>ARCHITECTURE</span>
+          <i>×</i>
+          <span>GEOMETRY</span>
+          <i>×</i>
+          <span>SOFTWARE</span>
+          <i>×</i>
+          <span>SPACE</span>
+          <i>×</i>
+          <span>COMPUTATION</span>
+          <i>×</i>
+
+          <span>ARCHITECTURE</span>
+          <i>×</i>
+          <span>GEOMETRY</span>
+          <i>×</i>
+          <span>SOFTWARE</span>
+          <i>×</i>
+          <span>SPACE</span>
+          <i>×</i>
+          <span>COMPUTATION</span>
+          <i>×</i>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- =========================================================
+         ARCHITECTURE
+    ========================================================== -->
+    <section class="projects-section section" id="arquitectura">
+      <header class="section-heading reveal">
+        <div class="section-heading__number">01</div>
+
+        <div>
+          <p class="eyebrow">SELECTED WORK / BUILT + UNBUILT</p>
+
+          <h2>
+            ARQUI<span>TECTURA</span>
+          </h2>
+        </div>
+
+        <p class="section-heading__description">
+          Espacio, representación, construcción y
+          experimentación material.
+        </p>
+      </header>
+
+      <div class="architecture-grid">
+        <article class="project project--wide reveal">
+          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Levels House">
+            <div
+              class="project__visual project__visual--image"
+              style="--project-image: url('assets/architecture/levels-house.jpg');"
+            >
+              <div class="project__coordinates">
+                <span>AXO.01</span>
+                <span>1:100</span>
+              </div>
+            </div>
+
+            <div class="project__information">
+              <span class="project__number">A / 001</span>
+
+              <div>
+                <h3>LEVELS HOUSE</h3>
+                <p>
+                  Geometría descriptiva /
+                  planimetría /
+                  axonometría
+                </p>
+              </div>
+
+              <span class="project__year">2023</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="project reveal">
+          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Geometría Descriptiva">
+            <div
+              class="project__visual project__visual--image project__visual--light"
+              style="--project-image: url('assets/architecture/descriptive-geometry.jpg');"
+            >
+              <div class="project__coordinates project__coordinates--dark">
+                <span>DG.02</span>
+                <span>PROJECTION</span>
+              </div>
+            </div>
+
+            <div class="project__information">
+              <span class="project__number">A / 002</span>
+
+              <div>
+                <h3>DESCRIPTIVE GEOMETRY</h3>
+                <p>
+                  Intersecciones /
+                  proyecciones /
+                  superficies
+                </p>
+              </div>
+
+              <span class="project__year">2024</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="project reveal">
+          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir Ether Gallery">
+            <div
+              class="project__visual project__visual--image"
+              style="--project-image: url('assets/architecture/ether-gallery.jpg');"
+            >
+              <div class="project__coordinates">
+                <span>AXO.04</span>
+                <span>TRANSFORMATION</span>
+              </div>
+            </div>
+
+            <div class="project__information">
+              <span class="project__number">A / 003</span>
+
+              <div>
+                <h3>ETHER ART GALLERY</h3>
+                <p>
+                  Transformación /
+                  recorrido /
+                  espacio expositivo
+                </p>
+              </div>
+
+              <span class="project__year">2024</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="project project--wide reveal">
+          <a class="project__link" href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir El Chiringuito y el Mar">
+            <div
+              class="project__visual project__visual--ocean project__visual--image"
+              style="--project-image: url('assets/architecture/chiringuito.jpg');"
+            >
+              <div class="project__coordinates">
+                <span>SYS.09</span>
+                <span>MAR / RIBEIRA</span>
+              </div>
+            </div>
+
+            <div class="project__information">
+              <span class="project__number">A / 004</span>
+
+              <div>
+                <h3>EL CHIRINGUITO Y EL MAR</h3>
+                <p>
+                  Sistema modular /
+                  infraestructura flotante /
+                  paisaje
+                </p>
+              </div>
+
+              <span class="project__year">2025</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROGRAMMING
+    ========================================================== -->
+    <section class="software-section section" id="programacion">
+      <header class="section-heading reveal">
+        <div class="section-heading__number">02</div>
+
+        <div>
+          <p class="eyebrow">TOOLS / SOFTWARE / PROTOTYPES</p>
+
+          <h2>
+            PROGRA<span>MACIÓN</span>
+          </h2>
+        </div>
+
+        <p class="section-heading__description">
+          Herramientas y experimentos donde código,
+          diseño y geometría se encuentran.
+        </p>
+      </header>
+
+      <div class="software-list">
+        <article class="software-project reveal">
+          <div class="software-project__index">
+            P.001
+          </div>
+
+          <div class="software-project__body">
+            <div class="software-project__head">
+              <h3>GENERATIVE PLAN SYSTEM</h3>
+
+              <span class="software-project__status">
+                EXPERIMENT
+              </span>
+            </div>
+
+            <p>
+              Generador procedural de distribuciones y
+              diagramas espaciales basado en reglas geométricas.
+            </p>
+
+            <div class="tech-tags">
+              <span>JAVASCRIPT</span>
+              <span>SVG</span>
+              <span>GEOMETRY</span>
+            </div>
+          </div>
+
+          <div class="software-project__preview preview-grid" aria-hidden="true">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <span></span>
+          </div>
+
+          <a class="software-project__action magnetic" href="#">
+            ↗
+            <span>OPEN</span>
+          </a>
+        </article>
+
+        <article class="software-project reveal">
+          <div class="software-project__index">
+            P.002
+          </div>
+
+          <div class="software-project__body">
+            <div class="software-project__head">
+              <h3>SECTION MACHINE</h3>
+
+              <span class="software-project__status software-project__status--blue">
+                TOOL
+              </span>
+            </div>
+
+            <p>
+              Interfaz experimental para estudiar secciones,
+              perfiles y relaciones espaciales en tiempo real.
+            </p>
+
+            <div class="tech-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>CANVAS API</span>
+            </div>
+          </div>
+
+          <div class="software-project__preview preview-section" aria-hidden="true">
+            <svg viewBox="0 0 300 130">
+              <path d="M0,88 C34,88 45,35 78,35 C110,35 102,96 145,96 C180,96 182,52 213,52 C252,52 251,90 300,90"/>
+              <line x1="0" y1="105" x2="300" y2="105"/>
+              <line x1="55" y1="15" x2="55" y2="120"/>
+              <line x1="232" y1="15" x2="232" y2="120"/>
+            </svg>
+          </div>
+
+          <a class="software-project__action magnetic" href="#">
+            ↗
+            <span>OPEN</span>
+          </a>
+        </article>
+
+        <article class="software-project reveal">
+          <div class="software-project__index">
+            P.003
+          </div>
+
+          <div class="software-project__body">
+            <div class="software-project__head">
+              <h3>SPATIAL INDEX</h3>
+
+              <span class="software-project__status">
+                WEB
+              </span>
+            </div>
+
+            <p>
+              Archivo digital para clasificar referencias
+              arquitectónicas mediante relaciones y etiquetas.
+            </p>
+
+            <div class="tech-tags">
+              <span>JAVASCRIPT</span>
+              <span>LOCAL STORAGE</span>
+              <span>DATA</span>
+            </div>
+          </div>
+
+          <div class="software-project__preview preview-data" aria-hidden="true">
+            <span>01 01101</span>
+            <span>02 10011</span>
+            <span>03 11010</span>
+            <span>04 00101</span>
+            <span>05 10110</span>
+          </div>
+
+          <a class="software-project__action magnetic" href="#">
+            ↗
+            <span>OPEN</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         REFERENCES
+    ========================================================== -->
+    <section class="references-section section" id="referencias">
+      <header class="section-heading reveal">
+        <div class="section-heading__number">03</div>
+
+        <div>
+          <p class="eyebrow">READING / PEOPLE / IDEAS</p>
+
+          <h2>
+            REFEREN<span>CIAS</span>
+          </h2>
+        </div>
+
+        <p class="section-heading__description">
+          Un archivo vivo de personas, textos,
+          edificios e ideas.
+        </p>
+      </header>
+
+      <div class="reference-index">
+        <a href="#" class="reference-row reveal">
+          <span class="reference-row__number">001</span>
+          <span class="reference-row__type">ARCHITECTURE</span>
+          <strong>ENZO MARI</strong>
+          <span class="reference-row__meta">DESIGN / SYSTEMS</span>
+          <span class="reference-row__arrow">↗</span>
+        </a>
+
+        <a href="#" class="reference-row reveal">
+          <span class="reference-row__number">002</span>
+          <span class="reference-row__type">THEORY</span>
+          <strong>MICHEL FOUCAULT</strong>
+          <span class="reference-row__meta">SPACE / HETEROTOPIA</span>
+          <span class="reference-row__arrow">↗</span>
+        </a>
+
+        <a href="#" class="reference-row reveal">
+          <span class="reference-row__number">003</span>
+          <span class="reference-row__type">LITERATURE</span>
+          <strong>ERNEST HEMINGWAY</strong>
+          <span class="reference-row__meta">THE OLD MAN AND THE SEA</span>
+          <span class="reference-row__arrow">↗</span>
+        </a>
+
+        <a href="#" class="reference-row reveal">
+          <span class="reference-row__number">004</span>
+          <span class="reference-row__type">COMPUTATION</span>
+          <strong>GENERATIVE SYSTEMS</strong>
+          <span class="reference-row__meta">ALGORITHMS / FORM</span>
+          <span class="reference-row__arrow">↗</span>
+        </a>
+
+        <a href="#" class="reference-row reveal">
+          <span class="reference-row__number">005</span>
+          <span class="reference-row__type">ARCHIVE</span>
+          <strong>GEOMETRIC NOTES</strong>
+          <span class="reference-row__meta">ONGOING COLLECTION</span>
+          <span class="reference-row__arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         REFLECTIONS
+    ========================================================== -->
+    <section class="reflections-section section" id="reflexiones">
+      <header class="section-heading reveal">
+        <div class="section-heading__number">04</div>
+
+        <div>
+          <p class="eyebrow">CRITICAL TEXTS / NOTES / FRIKADAS</p>
+
+          <h2>
+            REFLE<span>XIONES</span>
+          </h2>
+        </div>
+
+        <p class="section-heading__description">
+          Archivo de textos propios cargados desde Markdown.
+        </p>
+      </header>
+
+      <div class="reflections-layout">
+        <div class="reflections-index" data-reflections-index>
+          <p class="reflections-empty">Añade archivos `.md` en `reflexiones/` y declara sus nombres en `reflexiones/index.json`.</p>
+        </div>
+
+        <article class="reflection-reader" data-reflection-reader>
+          <div class="reflection-reader__meta">
+            <span>MD / 000</span>
+            <span>WAITING FOR FILE</span>
+          </div>
+
+          <div class="reflection-reader__body">
+            <h3>Sin reflexión seleccionada</h3>
+            <p>Cuando exista al menos un Markdown, aquí se renderizará el texto.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         RESOURCES
+    ========================================================== -->
+    <section class="resources-section section" id="recursos">
+      <header class="section-heading reveal">
+        <div class="section-heading__number">05</div>
+
+        <div>
+          <p class="eyebrow">OPEN FILES / LINKS / MATERIAL</p>
+
+          <h2>
+            RECUR<span>SOS</span>
+          </h2>
+        </div>
+
+        <p class="section-heading__description">
+          Pequeñas herramientas, documentos y
+          archivos de trabajo.
+        </p>
+      </header>
+
+      <div class="resource-grid">
+        <a href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf" target="_blank" rel="noopener noreferrer" class="resource-card reveal">
+          <div class="resource-card__top">
+            <span>R.001</span>
+            <span>PDF</span>
+          </div>
+
+          <div class="resource-card__symbol">
+            ↘
+          </div>
+
+          <div>
+            <h3>ARCHITECTURE PORTFOLIO</h3>
+            <p>
+              Portfolio de arquitectura con proyectos,
+              geometría, representación y material gráfico.
+            </p>
+          </div>
+
+          <span class="resource-card__footer">
+            DOWNLOAD / VIEW PDF
+          </span>
+        </a>
+
+        <a href="#" class="resource-card reveal">
+          <div class="resource-card__top">
+            <span>R.002</span>
+            <span>LINK</span>
+          </div>
+
+          <div class="resource-card__symbol">
+            ⌁
+          </div>
+
+          <div>
+            <h3>DIGITAL TOOLBOX</h3>
+            <p>
+              Software, utilidades y pequeños recursos
+              que utilizo habitualmente.
+            </p>
+          </div>
+
+          <span class="resource-card__footer">
+            OPEN INDEX ↗
+          </span>
+        </a>
+
+        <a href="#" class="resource-card reveal">
+          <div class="resource-card__top">
+            <span>R.003</span>
+            <span>CODE</span>
+          </div>
+
+          <div class="resource-card__symbol">
+            &lt;/&gt;
+          </div>
+
+          <div>
+            <h3>CODE SKETCHES</h3>
+            <p>
+              Experimentos incompletos, algoritmos,
+              interfaces y pruebas gráficas.
+            </p>
+          </div>
+
+          <span class="resource-card__footer">
+            GITHUB ↗
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CONTACT
+    ========================================================== -->
+    <section class="contact-section section" id="contacto">
+      <div class="contact-section__grid" aria-hidden="true"></div>
+
+      <div class="section-marker reveal">
+        <span>06</span>
+        <span>CONTACT / COLLABORATION</span>
+      </div>
+
+      <div class="contact-main">
+        <p class="eyebrow reveal">
+          ¿CONSTRUIMOS ALGO?
+        </p>
+
+        <h2 class="contact-title reveal">
+          LET'S MAKE
+          <span>SPACE.</span>
+        </h2>
+
+        <p class="contact-copy reveal">
+          Disponible para conversaciones, colaboraciones,
+          proyectos experimentales y oportunidades relacionadas
+          con arquitectura, software y diseño computacional.
+        </p>
+      </div>
+
+      <div class="contact-links reveal">
+        <a class="contact-link magnetic" href="mailto:angelyague.a@gmail.com">
+          <span>01</span>
+          <strong>EMAIL</strong>
+          <span>angelyague.a@gmail.com</span>
+          <i>↗</i>
+        </a>
+
+        <a
+          class="contact-link magnetic"
+          href="https://www.instagram.com/architecture.ay/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>02</span>
+          <strong>INSTAGRAM</strong>
+          <span>@architecture.ay</span>
+          <i>↗</i>
+        </a>
+
+        <a
+          class="contact-link magnetic"
+          href="https://www.linkedin.com/in/%C3%A1ngel-yag%C3%BCe-arquitectura/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>03</span>
+          <strong>LINKEDIN</strong>
+          <span>/in/ángel-yagüe-arquitectura</span>
+          <i>↗</i>
+        </a>
+
+        <a
+          class="contact-link magnetic"
+          href="web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>04</span>
+          <strong>PORTFOLIO PDF</strong>
+          <span>DOWNLOAD / VIEW</span>
+          <i>↓</i>
+        </a>
+      </div>
+
+      <footer class="footer">
+        <span>© <span id="current-year"></span> ÁNGEL YAGÜE</span>
+
+        <span>
+          ARCHITECTURE × SOFTWARE
+        </span>
+
+        <button class="back-to-top magnetic" type="button">
+          TOP ↑
+        </button>
+      </footer>
+    </section>
+  </main>
+
+  <div class="page-transition" aria-hidden="true">
+    <span>LOADING / DRAWING</span>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
