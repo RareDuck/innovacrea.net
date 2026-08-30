@@ -128,6 +128,7 @@ button {
   [role="button"],
   .magnetic,
   .project,
+  .personal-panel,
   .reference-row,
   .resource-card,
   .reflection-link {
@@ -865,22 +866,52 @@ main {
 ========================================================= */
 
 .projects-section {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.035) 1px,
+      transparent 1px
+    ),
+    #f7f6f1;
+
+  background-size:
+    calc(100vw / 12)
+    calc(100vw / 12);
+
+  color: var(--black);
+}
+
+.projects-section .section-heading h2 span {
+  -webkit-text-stroke-color: var(--black);
+}
+
+.projects-section .eyebrow,
+.projects-section .section-heading__description {
+  color: #696965;
 }
 
 .architecture-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  border-left: 1px solid rgba(0, 0, 0, 0.18);
 }
 
 .project {
   min-width: 0;
 
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-right: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
 }
 
 .project--wide {
@@ -900,10 +931,22 @@ main {
 
   background:
     linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
       135deg,
-      #151515,
-      #090909
+      #ffffff,
+      #ecebe5
     );
+
+  background-size: 42px 42px, 42px 42px, auto;
 }
 
 .project--wide .project__visual {
@@ -913,27 +956,48 @@ main {
 .project__visual--image {
   background-image:
     linear-gradient(
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2)
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
     ),
     var(--project-image),
     linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
       135deg,
-      #151515,
-      #090909
+      #ffffff,
+      #ecebe5
     );
 
-  background-size: cover;
+  background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+  background-size: auto, contain, 42px 42px, 42px 42px, auto;
   background-position: center;
 }
 
 .project__visual--light {
   background-image:
     linear-gradient(
-      rgba(241, 240, 235, 0.25),
-      rgba(241, 240, 235, 0.25)
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.12)
     ),
     var(--project-image),
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px
+    ),
     linear-gradient(
       135deg,
       #f4f3ee,
@@ -951,13 +1015,13 @@ main {
     linear-gradient(
       to right,
       transparent 49.85%,
-      rgba(255, 255, 255, 0.15) 50%,
+      rgba(228, 11, 0, 0.55) 50%,
       transparent 50.15%
     ),
     linear-gradient(
       to bottom,
       transparent 49.85%,
-      rgba(255, 255, 255, 0.15) 50%,
+      rgba(228, 11, 0, 0.55) 50%,
       transparent 50.15%
     );
 
@@ -972,11 +1036,13 @@ main {
 
 .project__visual--image {
   transition:
-    background-size 900ms cubic-bezier(0.2, 0.7, 0, 1);
+    background-size 900ms cubic-bezier(0.2, 0.7, 0, 1),
+    filter 900ms cubic-bezier(0.2, 0.7, 0, 1);
 }
 
 .project:hover .project__visual--image {
-  background-size: auto, 104%, auto;
+  background-size: auto, min(102%, 980px), 42px 42px, 42px 42px, auto;
+  filter: contrast(1.03);
 }
 
 .project__coordinates {
@@ -992,7 +1058,7 @@ main {
   font-size: 8px;
   letter-spacing: 0.12em;
 
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .project__coordinates--dark {
@@ -1013,8 +1079,17 @@ main {
 }
 
 .project:hover .project__information {
-  background: var(--white);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+
+.project:hover .project__information p {
+  color: #bab8b1;
+}
+
+.project:hover .project__number,
+.project:hover .project__year {
+  color: #8f8d87;
 }
 
 .project__number,
@@ -1045,11 +1120,7 @@ main {
 
 
 .project__visual--ocean {
-  background-color: #326f85;
-  background-blend-mode:
-    multiply,
-    normal,
-    normal;
+  background-color: #f7f6f1;
 }
 
 
@@ -1291,8 +1362,132 @@ main {
 
 
 /* =========================================================
-   REFERENCES
+   PERSONAL ARCHIVE
 ========================================================= */
+
+.personal-section {
+  border-bottom: 1px solid var(--line);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(228, 11, 0, 0.08),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 20%,
+      rgba(255, 221, 0, 0.045),
+      transparent 28rem
+    ),
+    var(--black);
+}
+
+.personal-board {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.32fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.personal-board__index {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+
+  min-height: 420px;
+  padding: 22px;
+
+  border: 1px solid var(--line);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.06),
+      transparent
+    );
+}
+
+.personal-board__tag {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--grey);
+}
+
+.personal-board__index p {
+  margin: clamp(46px, 8vw, 110px) 0 0;
+
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 31px);
+  line-height: 1.13;
+}
+
+.personal-board__main {
+  display: grid;
+  gap: clamp(28px, 4vw, 54px);
+}
+
+.personal-panel {
+  border: 1px solid var(--line);
+
+  background:
+    linear-gradient(
+      to right,
+      transparent 49.9%,
+      rgba(255, 255, 255, 0.06) 50%,
+      transparent 50.1%
+    ),
+    rgba(255, 255, 255, 0.018);
+}
+
+.personal-panel__header {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: baseline;
+  gap: 20px;
+
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.personal-panel__header span {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--red);
+}
+
+.personal-panel__header h3 {
+  margin: 0;
+
+  font-size: clamp(30px, 4vw, 72px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.personal-panel .reflections-layout,
+.personal-panel .reference-index,
+.personal-panel .resource-grid {
+  border-top: 0;
+}
+
+.personal-panel .reflections-layout {
+  border-left: 0;
+}
+
+.personal-panel .resource-grid {
+  grid-template-columns: repeat(2, 1fr);
+  border-left: 0;
+}
+
+.personal-panel .resource-card {
+  min-height: 360px;
+}
 
 .references-section {
   background: var(--white);
@@ -1936,6 +2131,17 @@ main {
     grid-column: 2;
   }
 
+  .personal-board {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-board__index {
+    position: relative;
+    top: auto;
+
+    min-height: auto;
+  }
+
   .software-project {
     grid-template-columns:
       70px
@@ -1953,6 +2159,10 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
+  .personal-panel .resource-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .reflections-layout {
     grid-template-columns: 1fr;
   }
@@ -1963,6 +2173,10 @@ main {
 
   .resource-card:last-child {
     grid-column: span 2;
+  }
+
+  .personal-panel .resource-card:last-child {
+    grid-column: span 1;
   }
 }
 
@@ -2116,6 +2330,27 @@ main {
     height: 55px;
   }
 
+  .personal-board__index {
+    padding: 18px;
+  }
+
+  .personal-board__index p {
+    margin-top: 44px;
+    font-size: 22px;
+  }
+
+  .personal-panel__header {
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+
+    padding: 16px 0;
+  }
+
+  .personal-panel {
+    border-right: 0;
+    border-left: 0;
+  }
+
   .reference-row {
     grid-template-columns: 45px 1fr 20px;
     gap: 12px;
@@ -2146,6 +2381,10 @@ main {
   }
 
   .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-panel .resource-grid {
     grid-template-columns: 1fr;
   }
 

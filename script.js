@@ -327,6 +327,7 @@ if (cursor && isFinePointer) {
       target instanceof Element &&
       target.closest(
         "a, button, .project, .reference-row, .resource-card, .reflection-link"
+          + ", .personal-panel"
       )
     ) {
       cursor.classList.add("is-hovering");
@@ -340,6 +341,7 @@ if (cursor && isFinePointer) {
       target instanceof Element &&
       target.closest(
         "a, button, .project, .reference-row, .resource-card, .reflection-link"
+          + ", .personal-panel"
       )
     ) {
       cursor.classList.remove("is-hovering");
@@ -581,7 +583,18 @@ function setReflectionReader(reflection, index) {
 }
 
 function renderReflections(reflections) {
-  if (!reflectionsIndex || reflections.length === 0) {
+  if (!reflectionsIndex) {
+    return;
+  }
+
+  if (reflections.length === 0) {
+    reflectionsIndex.innerHTML = `
+      <p class="reflections-empty">
+        Personal está preparado para leer Markdown desde reflexiones/.
+        Añade archivos .md y declara sus nombres en reflexiones/index.json.
+      </p>
+    `;
+
     return;
   }
 
@@ -648,7 +661,7 @@ async function loadReflections() {
 
     const files = await manifestResponse.json();
 
-    if (!Array.isArray(files) || files.length === 0) {
+    if (!Array.isArray(files)) {
       return;
     }
 
