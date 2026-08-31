@@ -1,0 +1,183 @@
+[
+  { "id": "levels-house",
+    "title": "Levels House",
+    "value": 0,
+    "category": "Exercise",
+    "year": "2023",
+    "location": "Academic work",
+    "text": "Ejercicio académico de geometría descriptiva, planimetría y axonometría.",
+    "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "media": [
+      {
+        "alt": "Levels House drawing",
+        "id": "levels-house-main",
+        "type": "image",
+        "src": "assets/architecture/levels-house.jpg",
+        "size": "large",
+        "caption": "Axonometría, planta y lectura geométrica."
+      }
+    ],
+    "sections": [
+      {
+        "title": "Sistema",
+        "blocks": [
+          {
+            "body": "Trabajo de representación arquitectónica centrado en niveles, precisión gráfica y lectura espacial."
+          },
+          {
+            "media": ["levels-house-main"],
+            "size": "medium"
+          }
+        ]
+      }
+    ]
+  },
+  { "id": "descriptive-geometry",
+    "title": "Descriptive Geometry",
+    "value": 0,
+    "category": "Exercise",
+    "year": "2023",
+    "location": "Academic work",
+    "text": "Ejercicio académico de intersecciones, proyecciones y superficies.",
+    "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "media": [
+      {"alt": "Descriptive geometry drawing",
+        "id": "descriptive-geometry-main",
+        "type": "image",
+        "src": "assets/architecture/descriptive-geometry.jpg",
+        "size": "large",
+        "caption": "Construcción técnica y proyección geométrica."
+      }
+    ],
+    "sections": [
+      {
+        "title": "Proceso",
+        "blocks": [
+          {"body": "Exploración de sistemas de proyección, intersección y control gráfico desde geometría descriptiva."},
+          {
+            "media": ["descriptive-geometry-main"],
+            "size": "medium"
+          }
+        ]
+      }
+    ]
+  },
+  { "id": "ether-art-gallery",
+    "title": "Ether Art Gallery",
+    "value": 0,
+    "category": "Architecture",
+    "year": "2024",
+    "location": "Academic work - No location",
+    "text": "Proyecto arquitectónico centrado en transformación, recorrido y espacio expositivo.",
+    "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "media": [
+      {"alt": "Ether Art Gallery project image",
+        "id": "ether-gallery-main",
+        "type": "image",
+        "src": "assets/architecture/ether-gallery.jpg",
+        "size": "large",
+        "caption": "Sistema espacial para galería de arte."
+      }
+    ],
+    "sections": [
+      {
+        "title": "Lectura",
+        "blocks": [
+          {"body": "La propuesta organiza recorrido, imagen y estructura como una secuencia espacial controlada."},
+          {
+            "media": ["ether-gallery-main"],
+            "size": "large"
+          }
+        ]
+      }
+    ]
+  },
+  { "id": "el-chiringuito-y-el-mar",
+    "title": "El Chiringuito y el Mar",
+    "value": 5,
+    "category": "Generative design",
+    "year": "2025",
+    "location": "Academic work - Coast",
+    "text": "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
+    "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "media": [
+      {"alt": "El Chiringuito y el Mar project image",
+        "id": "chiringuito-main",
+        "type": "image",
+        "src": "assets/architecture/chiringuito.jpg",
+        "size": "large",
+        "caption": "Módulo, borde marítimo e infraestructura ligera."
+      }
+    ],
+    "sections": [
+      {
+        "title": "Estrategia",
+        "blocks": [
+          {
+            "body": "El proyecto trabaja con una lógica modular y adaptable para construir relación entre programa, costa y sistema."
+          },
+          {
+            "media": ["chiringuito-main"],
+            "size": "large"
+          }
+        ]
+      }
+    ]
+  },
+  { "id": "laberinto-3d",
+    "title": "Laberínto Cúbico",
+    "value": 90,
+    "category": "Generative design",
+    "year": "2026",
+    "location": "Personal work - Abstract",
+    "text": "Laberinto tridimensional generado de forma procedural",
+    "url": "ahttps://github.com/RareDuck/cube_maze2",
+    "media": [
+      {"alt": "Impresión 3d del laberinto",
+        "id": "cubo-impreso-01",
+        "type": "image",
+        "src": "assets/projects/media/laberinto-3d/cubo3.jpeg",
+        "size": "medium",
+        "caption": "Primera iteración, cubo 5x5x5"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Objetivo",
+        "blocks": [
+    		{"body": "Programar un laberinto tridimensional que se ajuste a las medidas de un cubo de lado variable"},
+			{"media": ["cubo-impreso-01"],
+            "size": "medium"}
+        ]
+      }
+    ]
+  }
+   { "id": "portal-urbanismo",
+    "title": "Aplicación de control urbanístico",
+    "value": 60,
+    "category": "Desktop Application - AI coded",
+    "year": "2026",
+    "location": "Personal work - Abstract",
+    "text": "Aplicación de escritorio orientada al control urbanístico",
+    "url": "",
+    "media": [
+      {"alt": "Impresión 3d del laberinto",
+        "id": "cubo-impreso-01",
+        "type": "image",
+        "src": "assets/projects/media/laberinto-3d/cubo3.jpeg",
+        "size": "medium",
+        "caption": "Primera iteración, cubo 5x5x5"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Objetivo",
+        "blocks": [
+    		{"body": "Programar un laberinto tridimensional que se ajuste a las medidas de un cubo de lado variable"},
+			{"media": ["cubo-impreso-01"],
+            "size": "medium"}
+        ]
+      }
+    ]
+  }
+]

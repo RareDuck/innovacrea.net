@@ -393,6 +393,8 @@ const heroTitle = document.querySelector(".hero-title");
 const scrambleCharacters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\[]{}<>+-×";
 
+let activeScramble = null;
+
 function randomCharacter() {
   const index = Math.floor(
     Math.random() * scrambleCharacters.length
@@ -410,8 +412,23 @@ function scrambleElement(element) {
     ".hero-title__main"
   );
 
+  mainLines.forEach((line) => {
+    if (!line.dataset.originalText) {
+      line.dataset.originalText = line.textContent.trim();
+    }
+  });
+
+  if (activeScramble) {
+    window.clearInterval(activeScramble);
+    activeScramble = null;
+
+    mainLines.forEach((line) => {
+      line.textContent = line.dataset.originalText;
+    });
+  }
+
   const originalTexts = Array.from(mainLines).map(
-    (line) => line.textContent.trim()
+    (line) => line.dataset.originalText
   );
 
   let frame = 0;
@@ -419,7 +436,7 @@ function scrambleElement(element) {
 
   element.classList.add("is-scrambling");
 
-  const animation = window.setInterval(() => {
+  activeScramble = window.setInterval(() => {
     mainLines.forEach((line, lineIndex) => {
       const original = originalTexts[lineIndex];
 
@@ -451,7 +468,8 @@ function scrambleElement(element) {
     frame += 1;
 
     if (frame > totalFrames) {
-      window.clearInterval(animation);
+      window.clearInterval(activeScramble);
+      activeScramble = null;
 
       mainLines.forEach((line, index) => {
         line.textContent = originalTexts[index];
@@ -517,44 +535,9 @@ if (
    PROJECT SPECTRUM
 ========================================================= */
 
-const spectrumProjects = [
-  {
-    title: "Levels House",
-    value: 0,
-    type: "Exercise",
-    year: "2023",
-    text:
-      "Ejercicio académico de geometría descriptiva, planimetría y axonometría.",
-    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
-  },
-  {
-    title: "Descriptive Geometry",
-    value: 0,
-    type: "Exercise",
-    year: "2023",
-    text:
-      "Ejercicio académico de intersecciones, proyecciones y superficies.",
-    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
-  },
-  {
-    title: "Ether Art Gallery",
-    value: 0,
-    type: "Architecture",
-    year: "2024",
-    text:
-      "Proyecto arquitectónico centrado en transformación, recorrido y espacio expositivo.",
-    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
-  },
-  {
-    title: "El Chiringuito y el Mar",
-    value: 5,
-    type: "Architecture / system",
-    year: "2025",
-    text:
-      "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
-    url: "web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf"
-  }
-];
+let spectrumProjects = [];
+
+const projectsManifestUrl = "assets/projects/projects.json";
 
 const spectrumContainer =
   document.querySelector("[data-project-spectrum]");
@@ -576,6 +559,21 @@ const spectrumReadoutType =
 
 const spectrumHud =
   document.querySelector(".spectrum-hud");
+
+const projectDrawer =
+  document.querySelector("[data-project-drawer]");
+
+const projectDrawerBody =
+  document.querySelector("[data-project-drawer-body]");
+
+const projectDrawerTitle =
+  document.querySelector("#project-drawer-title");
+
+const projectDrawerNumber =
+  document.querySelector("[data-project-drawer-number]");
+
+const projectDrawerCloseButtons =
+  document.querySelectorAll("[data-project-drawer-close]");
 
 function formatSpectrumNumber(index) {
   return `W / ${String(index + 1).padStart(3, "0")}`;
@@ -609,8 +607,293 @@ function setActiveSpectrumProject(project, index) {
   }
 
   if (spectrumReadoutType) {
-    spectrumReadoutType.textContent = project.type;
+    spectrumReadoutType.textContent = project.category;
   }
+}
+
+function resetSpectrumProjectReadout() {
+  document.querySelectorAll(".spectrum-row").forEach((row) => {
+    row.classList.remove("is-active");
+  });
+
+  if (spectrumReadoutNumber) {
+    spectrumReadoutNumber.textContent = "W / 000";
+  }
+
+  if (spectrumReadoutTitle) {
+    spectrumReadoutTitle.textContent = "Proyectos";
+  }
+
+  if (spectrumReadoutCopy) {
+    spectrumReadoutCopy.textContent = "";
+  }
+
+  if (spectrumReadoutAxis) {
+    spectrumReadoutAxis.textContent = "";
+  }
+
+  if (spectrumReadoutType) {
+    spectrumReadoutType.textContent = "WORK INDEX";
+  }
+}
+
+function normalizeProject(project) {
+  return {
+    id: project.id || "",
+    title: project.title || "Untitled project",
+    value: Number(project.value || 0),
+    category: project.category || project.type || "Project",
+    year: project.year || "",
+    location: project.location || "",
+    text: project.text || "",
+    url: project.url || "",
+    media: Array.isArray(project.media)
+      ? project.media.map((item, index) => normalizeProjectMedia(item, index))
+      : [],
+    sections: Array.isArray(project.sections) ? project.sections : []
+  };
+}
+
+function normalizeProjectMedia(item, index) {
+  return {
+    alt: item.alt || "",
+    id: item.id || `media-${String(index + 1).padStart(2, "0")}`,
+    type: item.type || "image",
+    src: item.src || "",
+    size: item.size || "full",
+    poster: item.poster || "",
+    caption: item.caption || ""
+  };
+}
+
+function getProjectMediaSize(size) {
+  const sizes = {
+    small: "min(360px, 100%)",
+    medium: "min(620px, 100%)",
+    large: "min(920px, 100%)",
+    full: "100%"
+  };
+
+  if (!size) {
+    return sizes.full;
+  }
+
+  if (sizes[size]) {
+    return sizes[size];
+  }
+
+  if (/^\d+(\.\d+)?(px|rem|em|%|vw)$/.test(size)) {
+    return size;
+  }
+
+  return sizes.full;
+}
+
+function renderProjectTextBlock(text) {
+  return String(text || "")
+    .trim()
+    .split(/\n{2,}/)
+    .filter(Boolean)
+    .map((paragraph) => `
+      <p class="project-drawer__paragraph">
+        ${renderInlineMarkdown(paragraph).replace(/\n/g, "<br>")}
+      </p>
+    `)
+    .join("");
+}
+
+function renderProjectMediaItem(item, sizeOverride = "") {
+  const type = item.type || "image";
+  const size = getProjectMediaSize(sizeOverride || item.size);
+  const caption = item.caption
+    ? `<figcaption>${escapeHTML(item.caption)}</figcaption>`
+    : "";
+
+  if (type === "video") {
+    return `
+      <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)}">
+        <video
+          src="${escapeHTML(item.src || "")}"
+          ${item.poster ? `poster="${escapeHTML(item.poster)}"` : ""}
+          controls
+          playsinline
+        ></video>
+        ${caption}
+      </figure>
+    `;
+  }
+
+  return `
+    <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)}">
+      <img
+        src="${escapeHTML(item.src || "")}"
+        alt="${escapeHTML(item.alt || "")}"
+        loading="lazy"
+      >
+      ${caption}
+    </figure>
+  `;
+}
+
+function renderProjectMediaReference(reference, mediaById, sizeOverride = "") {
+  if (typeof reference === "string") {
+    const item = mediaById.get(reference);
+
+    if (!item) {
+      return `
+        <div class="project-drawer__empty">
+          Media no encontrada: ${escapeHTML(reference)}
+        </div>
+      `;
+    }
+
+    return renderProjectMediaItem(item, sizeOverride);
+  }
+
+  if (
+    reference &&
+    typeof reference === "object"
+  ) {
+    const item = mediaById.get(reference.id);
+
+    if (!item) {
+      return `
+        <div class="project-drawer__empty">
+          Media no encontrada: ${escapeHTML(reference.id || "")}
+        </div>
+      `;
+    }
+
+    return renderProjectMediaItem(item, reference.size || sizeOverride);
+  }
+
+  return "";
+}
+
+function renderProjectSectionBlock(block, mediaById) {
+  if (typeof block === "string") {
+    return renderProjectTextBlock(block);
+  }
+
+  if (
+    !block ||
+    typeof block !== "object"
+  ) {
+    return "";
+  }
+
+  if (block.body) {
+    return renderProjectTextBlock(block.body);
+  }
+
+  if (Array.isArray(block.media)) {
+    return `
+      <div class="project-drawer__media project-drawer__media--inline">
+        ${block.media
+          .map((reference) => renderProjectMediaReference(
+            reference,
+            mediaById,
+            block.size || ""
+          ))
+          .join("")}
+      </div>
+    `;
+  }
+
+  return "";
+}
+
+function openProjectDrawer(project, index) {
+  if (!projectDrawer || !projectDrawerBody) {
+    return;
+  }
+
+  const normalizedProject = normalizeProject(project);
+  const architecture = 100 - normalizedProject.value;
+  const mediaById = new Map(
+    normalizedProject.media.map((item) => [item.id, item])
+  );
+
+  if (projectDrawerTitle) {
+    projectDrawerTitle.textContent = normalizedProject.title;
+  }
+
+  if (projectDrawerNumber) {
+    projectDrawerNumber.textContent = formatSpectrumNumber(index);
+  }
+
+  const sectionMarkup = normalizedProject.sections
+    .map((section) => {
+      const blocks = Array.isArray(section.blocks)
+        ? section.blocks
+        : [
+          {
+            body: section.body || ""
+          },
+          ...(Array.isArray(section.media)
+            ? [
+              {
+                media: section.media,
+                size: section.size || ""
+              }
+            ]
+            : [])
+        ];
+
+      return `
+        <section class="project-drawer__section">
+          <h3>${escapeHTML(section.title || "Nota")}</h3>
+          <div class="project-drawer__section-content">
+            ${blocks
+              .map((block) => renderProjectSectionBlock(block, mediaById))
+              .join("")}
+          </div>
+        </section>
+      `;
+    })
+    .join("");
+
+  projectDrawerBody.innerHTML = `
+    <div class="project-drawer__meta">
+      <span>${escapeHTML(normalizedProject.year)}</span>
+      <span>${escapeHTML(normalizedProject.category)}</span>
+      <span>${escapeHTML(normalizedProject.location)}</span>
+    </div>
+
+    <p class="project-drawer__intro">
+      ${escapeHTML(normalizedProject.text)}
+    </p>
+
+    <div class="project-drawer__axis">
+      <span>${normalizedProject.value}% software</span>
+      <span>${architecture}% arquitectura</span>
+    </div>
+
+    ${sectionMarkup}
+
+    ${normalizedProject.url ? `
+      <a
+        class="project-drawer__link magnetic"
+        href="${escapeHTML(normalizedProject.url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ABRIR DOCUMENTO ↗
+      </a>
+    ` : ""}
+  `;
+
+  document.body.classList.add("project-drawer-open");
+  projectDrawer.setAttribute("aria-hidden", "false");
+}
+
+function closeProjectDrawer() {
+  if (!projectDrawer) {
+    return;
+  }
+
+  document.body.classList.remove("project-drawer-open");
+  projectDrawer.setAttribute("aria-hidden", "true");
 }
 
 function renderProjectSpectrum() {
@@ -620,6 +903,18 @@ function renderProjectSpectrum() {
 
   spectrumContainer.innerHTML = "";
 
+  if (spectrumProjects.length === 0) {
+    spectrumContainer.innerHTML = `
+      <p class="spectrum-error">
+        No se ha cargado assets/projects/projects.json.
+      </p>
+    `;
+
+    resetSpectrumProjectReadout();
+
+    return;
+  }
+
   spectrumProjects.forEach((project, index) => {
     const architecture = 100 - project.value;
     const row = document.createElement("article");
@@ -628,25 +923,19 @@ function renderProjectSpectrum() {
     row.dataset.spectrumIndex = index;
     row.style.setProperty("--position", project.value);
     row.tabIndex = 0;
+    row.setAttribute("role", "button");
+    row.setAttribute(
+      "aria-label",
+      `Abrir proyecto ${project.title}`
+    );
 
     row.innerHTML = `
-      <a
-        class="spectrum-row__number"
-        href="${escapeHTML(project.url)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <span class="spectrum-row__number">
         ${formatSpectrumNumber(index)}
-      </a>
+      </span>
 
       <h3 class="spectrum-row__title">
-        <a
-          href="${escapeHTML(project.url)}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>${escapeHTML(project.title)}</span>
-        </a>
+        <span>${escapeHTML(project.title)}</span>
       </h3>
 
       <div class="spectrum-row__track-wrap">
@@ -657,7 +946,7 @@ function renderProjectSpectrum() {
 
       <div class="spectrum-row__data">
         <strong>${project.value}% / ${architecture}%</strong>
-        <span>${escapeHTML(project.type)} / ${escapeHTML(project.year)}</span>
+        <span>${escapeHTML(project.category)} / ${escapeHTML(project.year)}</span>
       </div>
     `;
 
@@ -665,17 +954,111 @@ function renderProjectSpectrum() {
       setActiveSpectrumProject(project, index);
     });
 
+    row.addEventListener("mouseleave", () => {
+      resetSpectrumProjectReadout();
+    });
+
     row.addEventListener("focus", () => {
       setActiveSpectrumProject(project, index);
+    });
+
+    row.addEventListener("blur", () => {
+      resetSpectrumProjectReadout();
+    });
+
+    row.addEventListener("click", () => {
+      openProjectDrawer(project, index);
+    });
+
+    row.addEventListener("keydown", (event) => {
+      if (
+        event.key !== "Enter" &&
+        event.key !== " "
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      openProjectDrawer(project, index);
     });
 
     spectrumContainer.appendChild(row);
   });
 
-  setActiveSpectrumProject(spectrumProjects[0], 0);
+  resetSpectrumProjectReadout();
+  updateSpectrumHudPosition();
 }
 
-renderProjectSpectrum();
+async function loadProjectSpectrum() {
+  if (!spectrumContainer) {
+    return;
+  }
+
+  spectrumContainer.innerHTML = `
+    <p class="spectrum-error">
+      Cargando assets/projects/projects.json...
+    </p>
+  `;
+
+  try {
+    const cacheKey = Date.now();
+    const manifestUrl = new URL(
+      projectsManifestUrl,
+      document.baseURI
+    );
+
+    manifestUrl.searchParams.set("v", cacheKey);
+
+    const response = await fetch(
+      manifestUrl,
+      {
+        cache: "no-store"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("No projects manifest");
+    }
+
+    const projects = await response.json();
+
+    if (!Array.isArray(projects)) {
+      throw new Error("Projects manifest is not an array");
+    }
+
+    spectrumProjects = projects.map(normalizeProject);
+    renderProjectSpectrum();
+  } catch (error) {
+    spectrumProjects = [];
+
+    const isLocalFile = window.location.protocol === "file:";
+    const errorHint = isLocalFile
+      ? "Estás abriendo index.html como archivo. Para cargar JSON, sirve la web por HTTP."
+      : "Revisa que el JSON sea válido y que la ruta exista.";
+
+    spectrumContainer.innerHTML = `
+      <p class="spectrum-error">
+        No se pudo cargar assets/projects/projects.json. ${errorHint}
+      </p>
+    `;
+
+    console.error("Projects JSON load failed:", error);
+
+    resetSpectrumProjectReadout();
+  }
+}
+
+loadProjectSpectrum();
+
+projectDrawerCloseButtons.forEach((button) => {
+  button.addEventListener("click", closeProjectDrawer);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeProjectDrawer();
+  }
+});
 
 function updateSpectrumHudPosition() {
   if (!spectrumContainer || !spectrumHud) {
@@ -764,8 +1147,8 @@ function renderReflections(reflections) {
   if (reflections.length === 0) {
     reflectionsIndex.innerHTML = `
       <p class="reflections-empty">
-        Personal está preparado para leer Markdown desde reflexiones/.
-        Añade archivos .md y declara sus nombres en reflexiones/index.json.
+        Personal está preparado para leer Markdown desde assets/reflexiones/.
+        Añade archivos .md y declara sus nombres en assets/reflexiones/index.json.
       </p>
     `;
 
@@ -827,7 +1210,7 @@ async function loadReflections() {
   }
 
   try {
-    const manifestResponse = await fetch("reflexiones/index.json");
+    const manifestResponse = await fetch("assets/reflexiones/index.json");
 
     if (!manifestResponse.ok) {
       throw new Error("No reflections manifest");
@@ -841,7 +1224,7 @@ async function loadReflections() {
 
     const reflections = await Promise.all(
       files.map(async (file) => {
-        const response = await fetch(`reflexiones/${file}`);
+        const response = await fetch(`assets/reflexiones/${file}`);
 
         if (!response.ok) {
           throw new Error(`Cannot load ${file}`);
@@ -866,7 +1249,7 @@ async function loadReflections() {
   } catch (error) {
     reflectionsIndex.innerHTML = `
       <p class="reflection-error">
-        No se pudo cargar reflexiones/index.json. Sirve la web por HTTP
+        No se pudo cargar assets/reflexiones/index.json. Sirve la web por HTTP
         y declara ahí los .md que quieras mostrar.
       </p>
     `;

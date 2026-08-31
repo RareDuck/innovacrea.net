@@ -1,4 +1,0 @@
-interface:
-  display_name: "Archweb"
-  short_description: "Flujo reutilizable para arquitectura web"
-  default_prompt: "Usa $archweb para trabajar en esta tarea de arquitectura web."

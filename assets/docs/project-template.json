@@ -1,0 +1,70 @@
+{
+  "id": "nombre-del-proyecto-en-minusculas",
+  "title": "Nombre del Proyecto",
+  "value": 0,
+  "category": "Architecture / Software / Exercise",
+  "year": "2026",
+  "location": "Ciudad / contexto / curso",
+  "text": "Resumen corto del proyecto. Esto aparece en la barra inferior al hacer hover y al inicio del panel lateral.",
+  "url": "assets/web_documents/documento-opcional.pdf",
+  "media": [
+    {
+      "alt": "Descripción breve de la imagen",
+      "id": "foto1",
+      "type": "image",
+      "src": "assets/projects/media/nombre-del-proyecto/imagen-01.jpg",
+      "size": "medium",
+      "caption": "Pie de imagen opcional."
+    },
+    {
+      "alt": "Descripción breve del vídeo",
+      "id": "video1",
+      "type": "video",
+      "src": "assets/projects/media/nombre-del-proyecto/video-01.mp4",
+      "size": "large",
+      "poster": "assets/projects/media/nombre-del-proyecto/poster.jpg",
+      "caption": "Pie de vídeo opcional."
+    },
+    {
+      "alt": "Descripción breve del gif",
+      "id": "gif1",
+      "type": "gif",
+      "src": "assets/projects/media/nombre-del-proyecto/animacion.gif",
+      "size": "small",
+      "caption": "Pie de gif opcional."
+    }
+  ],
+  "sections": [
+    {
+      "title": "Concepto",
+      "blocks": [
+        {
+          "body": "Primer texto de la sección. Puedes usar **negrita**, *cursiva*, `monospace` y enlaces como [texto](https://example.com)."
+        },
+        {
+          "media": ["foto1", "gif1"],
+          "size": "medium"
+        },
+        {
+          "body": "Texto final después de las imágenes."
+        }
+      ]
+    },
+    {
+      "title": "Proceso",
+      "blocks": [
+        {
+          "body": "Otra sección opcional. Puedes borrar o añadir tantas como necesites."
+        },
+        {
+          "media": [
+            {
+              "id": "video1",
+              "size": "full"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
