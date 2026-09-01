@@ -647,10 +647,11 @@ function normalizeProject(project) {
     location: project.location || "",
     text: project.text || "",
     url: project.url || "",
+    content: project.content || "",
+    body: project.body || "",
     media: Array.isArray(project.media)
       ? project.media.map((item, index) => normalizeProjectMedia(item, index))
-      : [],
-    sections: Array.isArray(project.sections) ? project.sections : []
+      : []
   };
 }
 
@@ -689,29 +690,29 @@ function getProjectMediaSize(size) {
   return sizes.full;
 }
 
-function renderProjectTextBlock(text) {
-  return String(text || "")
-    .trim()
-    .split(/\n{2,}/)
-    .filter(Boolean)
-    .map((paragraph) => `
-      <p class="project-drawer__paragraph">
-        ${renderInlineMarkdown(paragraph).replace(/\n/g, "<br>")}
-      </p>
-    `)
-    .join("");
+function getProjectMediaHeight(size) {
+  const heights = {
+    small: "260px",
+    medium: "420px",
+    large: "560px",
+    full: "min(720px, 70svh)"
+  };
+
+  return heights[size] || "auto";
 }
 
 function renderProjectMediaItem(item, sizeOverride = "") {
   const type = item.type || "image";
-  const size = getProjectMediaSize(sizeOverride || item.size);
+  const requestedSize = sizeOverride || item.size;
+  const size = getProjectMediaSize(requestedSize);
+  const height = getProjectMediaHeight(requestedSize);
   const caption = item.caption
     ? `<figcaption>${escapeHTML(item.caption)}</figcaption>`
     : "";
 
   if (type === "video") {
     return `
-      <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)}">
+      <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)};--media-height:${escapeHTML(height)}">
         <video
           src="${escapeHTML(item.src || "")}"
           ${item.poster ? `poster="${escapeHTML(item.poster)}"` : ""}
@@ -724,7 +725,7 @@ function renderProjectMediaItem(item, sizeOverride = "") {
   }
 
   return `
-    <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)}">
+    <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)};--media-height:${escapeHTML(height)}">
       <img
         src="${escapeHTML(item.src || "")}"
         alt="${escapeHTML(item.alt || "")}"
@@ -770,37 +771,61 @@ function renderProjectMediaReference(reference, mediaById, sizeOverride = "") {
   return "";
 }
 
-function renderProjectSectionBlock(block, mediaById) {
-  if (typeof block === "string") {
-    return renderProjectTextBlock(block);
+function getProjectMediaToken(line, mediaById) {
+  const match = line.trim().match(
+    /^\{([a-zA-Z0-9_-]+)(?:\|([^{}|]+))?\}$/
+  );
+
+  if (!match || !mediaById.has(match[1])) {
+    return null;
   }
 
-  if (
-    !block ||
-    typeof block !== "object"
-  ) {
-    return "";
+  return { id: match[1], size: match[2] ? match[2].trim() : "" };
+}
+
+function renderProjectMarkdown(markdown, mediaById) {
+  const blocks = String(markdown || "").trim().split(/\n{2,}/).filter(Boolean);
+
+  if (blocks.length === 0) {
+    return `<div class="project-drawer__empty">Este proyecto todavía no tiene contenido Markdown.</div>`;
   }
 
-  if (block.body) {
-    return renderProjectTextBlock(block.body);
-  }
+  return blocks.map((block) => {
+    const trimmedBlock = block.trim();
+    const mediaTokens = trimmedBlock
+      .split("\n")
+      .map((line) => getProjectMediaToken(line, mediaById));
 
-  if (Array.isArray(block.media)) {
-    return `
-      <div class="project-drawer__media project-drawer__media--inline">
-        ${block.media
-          .map((reference) => renderProjectMediaReference(
-            reference,
-            mediaById,
-            block.size || ""
-          ))
-          .join("")}
-      </div>
-    `;
-  }
+    if (mediaTokens.every(Boolean)) {
+      return `<div class="project-drawer__media project-drawer__media--inline">${mediaTokens
+        .map((token) => renderProjectMediaReference(token, mediaById))
+        .join("")}</div>`;
+    }
 
-  return "";
+    if (/^#{1,3} /.test(trimmedBlock)) {
+      return `<h3 class="project-drawer__heading">${renderInlineMarkdown(
+        trimmedBlock.replace(/^#{1,3} /, "")
+      )}</h3>`;
+    }
+
+    if (trimmedBlock.startsWith("> ")) {
+      return `<blockquote><p>${renderInlineMarkdown(
+        trimmedBlock.replace(/^> ?/gm, "")
+      )}</p></blockquote>`;
+    }
+
+    if (/^- /m.test(trimmedBlock)) {
+      const items = trimmedBlock.split("\n")
+        .filter((line) => line.startsWith("- "))
+        .map((line) => `<li>${renderInlineMarkdown(line.slice(2))}</li>`)
+        .join("");
+      return `<ul>${items}</ul>`;
+    }
+
+    return `<p class="project-drawer__paragraph">${renderInlineMarkdown(
+      trimmedBlock
+    ).replace(/\n/g, "<br>")}</p>`;
+  }).join("");
 }
 
 function openProjectDrawer(project, index) {
@@ -822,38 +847,10 @@ function openProjectDrawer(project, index) {
     projectDrawerNumber.textContent = formatSpectrumNumber(index);
   }
 
-  const sectionMarkup = normalizedProject.sections
-    .map((section) => {
-      const blocks = Array.isArray(section.blocks)
-        ? section.blocks
-        : [
-          {
-            body: section.body || ""
-          },
-          ...(Array.isArray(section.media)
-            ? [
-              {
-                media: section.media,
-                size: section.size || ""
-              }
-            ]
-            : [])
-        ];
-
-      return `
-        <section class="project-drawer__section">
-          <h3>${escapeHTML(section.title || "Nota")}</h3>
-          <div class="project-drawer__section-content">
-            ${blocks
-              .map((block) => renderProjectSectionBlock(block, mediaById))
-              .join("")}
-          </div>
-        </section>
-      `;
-    })
-    .join("");
+  const contentMarkup = renderProjectMarkdown(normalizedProject.body, mediaById);
 
   projectDrawerBody.innerHTML = `
+    <div class="project-drawer__layout">
     <div class="project-drawer__meta">
       <span>${escapeHTML(normalizedProject.year)}</span>
       <span>${escapeHTML(normalizedProject.category)}</span>
@@ -869,7 +866,9 @@ function openProjectDrawer(project, index) {
       <span>${architecture}% arquitectura</span>
     </div>
 
-    ${sectionMarkup}
+    <div class="project-drawer__content">
+      ${contentMarkup}
+    </div>
 
     ${normalizedProject.url ? `
       <a
@@ -881,6 +880,7 @@ function openProjectDrawer(project, index) {
         ABRIR DOCUMENTO ↗
       </a>
     ` : ""}
+    </div>
   `;
 
   document.body.classList.add("project-drawer-open");
@@ -1026,7 +1026,27 @@ async function loadProjectSpectrum() {
       throw new Error("Projects manifest is not an array");
     }
 
-    spectrumProjects = projects.map(normalizeProject);
+    spectrumProjects = await Promise.all(
+      projects.map(async (project) => {
+        const normalizedProject = normalizeProject(project);
+
+        if (!normalizedProject.content) {
+          return normalizedProject;
+        }
+
+        const contentUrl = new URL(normalizedProject.content, document.baseURI);
+        contentUrl.searchParams.set("v", cacheKey);
+
+        const contentResponse = await fetch(contentUrl, { cache: "no-store" });
+
+        if (!contentResponse.ok) {
+          throw new Error(`Cannot load project Markdown: ${normalizedProject.content}`);
+        }
+
+        normalizedProject.body = await contentResponse.text();
+        return normalizedProject;
+      })
+    );
     renderProjectSpectrum();
   } catch (error) {
     spectrumProjects = [];

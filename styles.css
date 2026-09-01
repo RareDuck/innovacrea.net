@@ -33,18 +33,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Thrashburn";
-  src: url("assets/fonts/thrashburn.otf") format("opentype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Zeusborne";
-  src: url("assets/fonts/zeusborne.otf") format("opentype");
-  font-display: swap;
-}
-
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--black); }
 body {
@@ -460,6 +448,10 @@ body.project-drawer-open .project-drawer-backdrop {
   margin-bottom:30px;
   border:1px solid var(--line);
 }
+.project-drawer__layout {
+  width:60%;
+  margin:0 auto;
+}
 .project-drawer__meta span {
   min-height:42px;
   padding:14px 12px;
@@ -475,6 +467,8 @@ body.project-drawer-open .project-drawer-backdrop {
   margin:0 0 28px;
   color:var(--grey-light);
   font:24px/1.18 var(--serif);
+  text-align:justify;
+  text-align-last:left;
 }
 .project-drawer__axis {
   display:flex;
@@ -510,9 +504,9 @@ body.project-drawer-open .project-drawer-backdrop {
 .project-drawer__media-item img,
 .project-drawer__media-item video {
   width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain;
+  height:var(--media-height, auto);
+  max-height:70svh;
+  object-fit:cover;
 }
 .project-drawer__media-item figcaption,
 .project-drawer__empty {
@@ -539,6 +533,19 @@ body.project-drawer-open .project-drawer-backdrop {
   letter-spacing:.08em;
   text-transform:uppercase;
 }
+.project-drawer__content {
+  display:grid;
+  gap:24px;
+}
+.project-drawer__heading {
+  margin:0;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+  color:var(--red);
+  font:15px var(--mono);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
 .project-drawer__section p {
   margin:0;
   color:var(--grey-light);
@@ -552,6 +559,8 @@ body.project-drawer-open .project-drawer-backdrop {
   margin:0;
   color:var(--grey-light);
   font:17px/1.35 var(--serif);
+  text-align:justify;
+  text-align-last:left;
 }
 .project-drawer__link {
   display:inline-flex;
@@ -769,6 +778,10 @@ body.project-drawer-open .project-drawer-backdrop {
   .project-drawer {
     width:100vw;
     min-width:0;
+  }
+  .project-drawer__layout {
+    width:auto;
+    margin:0;
   }
   .project-drawer-backdrop {
     background:rgba(0,0,0,.58);

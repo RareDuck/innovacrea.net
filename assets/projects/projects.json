@@ -1,5 +1,6 @@
 [
-  { "id": "levels-house",
+  {
+    "id": "levels-house",
     "title": "Levels House",
     "value": 0,
     "category": "Exercise",
@@ -7,32 +8,20 @@
     "location": "Academic work",
     "text": "Ejercicio académico de geometría descriptiva, planimetría y axonometría.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "content": "assets/projects/levels-house/content.md",
     "media": [
       {
         "alt": "Levels House drawing",
         "id": "levels-house-main",
         "type": "image",
-        "src": "assets/architecture/levels-house.jpg",
+        "src": "assets/projects/levels-house/media/levels-house.jpg",
         "size": "large",
         "caption": "Axonometría, planta y lectura geométrica."
       }
-    ],
-    "sections": [
-      {
-        "title": "Sistema",
-        "blocks": [
-          {
-            "body": "Trabajo de representación arquitectónica centrado en niveles, precisión gráfica y lectura espacial."
-          },
-          {
-            "media": ["levels-house-main"],
-            "size": "medium"
-          }
-        ]
-      }
     ]
   },
-  { "id": "descriptive-geometry",
+  {
+    "id": "descriptive-geometry",
     "title": "Descriptive Geometry",
     "value": 0,
     "category": "Exercise",
@@ -40,29 +29,20 @@
     "location": "Academic work",
     "text": "Ejercicio académico de intersecciones, proyecciones y superficies.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "content": "assets/projects/descriptive-geometry/content.md",
     "media": [
-      {"alt": "Descriptive geometry drawing",
+      {
+        "alt": "Descriptive geometry drawing",
         "id": "descriptive-geometry-main",
         "type": "image",
-        "src": "assets/architecture/descriptive-geometry.jpg",
+        "src": "assets/projects/descriptive-geometry/media/descriptive-geometry.jpg",
         "size": "large",
         "caption": "Construcción técnica y proyección geométrica."
       }
-    ],
-    "sections": [
-      {
-        "title": "Proceso",
-        "blocks": [
-          {"body": "Exploración de sistemas de proyección, intersección y control gráfico desde geometría descriptiva."},
-          {
-            "media": ["descriptive-geometry-main"],
-            "size": "medium"
-          }
-        ]
-      }
     ]
   },
-  { "id": "ether-art-gallery",
+  {
+    "id": "ether-art-gallery",
     "title": "Ether Art Gallery",
     "value": 0,
     "category": "Architecture",
@@ -70,29 +50,20 @@
     "location": "Academic work - No location",
     "text": "Proyecto arquitectónico centrado en transformación, recorrido y espacio expositivo.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "content": "assets/projects/ether-art-gallery/content.md",
     "media": [
-      {"alt": "Ether Art Gallery project image",
+      {
+        "alt": "Ether Art Gallery project image",
         "id": "ether-gallery-main",
         "type": "image",
-        "src": "assets/architecture/ether-gallery.jpg",
+        "src": "assets/projects/ether-art-gallery/media/ether-gallery.jpg",
         "size": "large",
         "caption": "Sistema espacial para galería de arte."
       }
-    ],
-    "sections": [
-      {
-        "title": "Lectura",
-        "blocks": [
-          {"body": "La propuesta organiza recorrido, imagen y estructura como una secuencia espacial controlada."},
-          {
-            "media": ["ether-gallery-main"],
-            "size": "large"
-          }
-        ]
-      }
     ]
   },
-  { "id": "el-chiringuito-y-el-mar",
+  {
+    "id": "el-chiringuito-y-el-mar",
     "title": "El Chiringuito y el Mar",
     "value": 5,
     "category": "Generative design",
@@ -100,83 +71,80 @@
     "location": "Academic work - Coast",
     "text": "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
+    "content": "assets/projects/el-chiringuito-y-el-mar/content.md",
     "media": [
-      {"alt": "El Chiringuito y el Mar project image",
+      {
+        "alt": "El Chiringuito y el Mar project image",
         "id": "chiringuito-main",
         "type": "image",
-        "src": "assets/architecture/chiringuito.jpg",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/chiringuito.jpg",
         "size": "large",
         "caption": "Módulo, borde marítimo e infraestructura ligera."
       }
-    ],
-    "sections": [
-      {
-        "title": "Estrategia",
-        "blocks": [
-          {
-            "body": "El proyecto trabaja con una lógica modular y adaptable para construir relación entre programa, costa y sistema."
-          },
-          {
-            "media": ["chiringuito-main"],
-            "size": "large"
-          }
-        ]
-      }
     ]
   },
-  { "id": "laberinto-3d",
+  {
+    "id": "laberinto-3d",
     "title": "Laberínto Cúbico",
     "value": 90,
     "category": "Generative design",
     "year": "2026",
     "location": "Personal work - Abstract",
     "text": "Laberinto tridimensional generado de forma procedural",
-    "url": "ahttps://github.com/RareDuck/cube_maze2",
+    "url": "https://github.com/RareDuck/cube_maze2",
+    "content": "assets/projects/laberinto-3d/content.md",
     "media": [
-      {"alt": "Impresión 3d del laberinto",
+      {
+        "alt": "Impresión 3d del laberinto",
         "id": "cubo-impreso-01",
         "type": "image",
-        "src": "assets/projects/media/laberinto-3d/cubo3.jpeg",
+        "src": "assets/projects/laberinto-3d/media/cubo3.jpeg",
         "size": "medium",
         "caption": "Primera iteración, cubo 5x5x5"
       }
-    ],
-    "sections": [
-      {
-        "title": "Objetivo",
-        "blocks": [
-    		{"body": "Programar un laberinto tridimensional que se ajuste a las medidas de un cubo de lado variable"},
-			{"media": ["cubo-impreso-01"],
-            "size": "medium"}
-        ]
-      }
     ]
-  }
-   { "id": "portal-urbanismo",
+  },
+  { "id": "portal-urbanismo",
     "title": "Aplicación de control urbanístico",
     "value": 60,
     "category": "Desktop Application - AI coded",
     "year": "2026",
-    "location": "Personal work - Abstract",
+    "location": "Personal work - App",
     "text": "Aplicación de escritorio orientada al control urbanístico",
     "url": "",
+    "content": "assets/projects/portal-urbanismo/content.md",
     "media": [
-      {"alt": "Impresión 3d del laberinto",
-        "id": "cubo-impreso-01",
-        "type": "image",
-        "src": "assets/projects/media/laberinto-3d/cubo3.jpeg",
-        "size": "medium",
-        "caption": "Primera iteración, cubo 5x5x5"
-      }
-    ],
-    "sections": [
       {
-        "title": "Objetivo",
-        "blocks": [
-    		{"body": "Programar un laberinto tridimensional que se ajuste a las medidas de un cubo de lado variable"},
-			{"media": ["cubo-impreso-01"],
-            "size": "medium"}
-        ]
+        "alt": "Landing page de la aplicación de control urbanístico",
+        "id": "portal-landing",
+        "type": "image",
+        "src": "assets/projects/portal-urbanismo/media/landing_page.png",
+        "size": "large",
+        "caption": "Pantalla inicial de la aplicación."
+      },
+      {
+        "alt": "Mapa de ejemplo del portal urbanístico",
+        "id": "portal-mapa",
+        "type": "image",
+        "src": "assets/projects/portal-urbanismo/media/mapa_ejemplo.png",
+        "size": "large",
+        "caption": "Archivo del mapa de la Villa Ducal de Pastrana"
+      },
+      {
+        "alt": "Capa personalizada de ejemplo del portal urbanístico",
+        "id": "portal-capa",
+        "type": "image",
+        "src": "assets/projects/portal-urbanismo/media/capa_personalizada_ejemplo.png",
+        "size": "medium",
+        "caption": "Visor de parcelas de distintas calles"
+      },
+      {
+        "alt": "Etiqueta de ejemplo del portal urbanístico",
+        "id": "portal-etiqueta",
+        "type": "image",
+        "src": "assets/projects/portal-urbanismo/media/etiqueta_ejemplo.png",
+        "size": "medium",
+        "caption": "Etiqueta pop-up resumen de la información del Palacio Ducal"
       }
     ]
   }

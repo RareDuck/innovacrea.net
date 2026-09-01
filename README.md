@@ -7,5 +7,5 @@ https://rareduck.github.io/innovaycrea.net/
 Workflow para añadir proyectos:
 
 - Guía: `assets/docs/WORKFLOW_PUBLICACIONES.md`
-- Plantilla: `assets/docs/project-template.json`
+- Plantillas: `assets/docs/project-template.json` y `assets/docs/project-template.md`
 - Datos editables: `assets/projects/projects.json`
