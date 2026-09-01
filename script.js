@@ -1,8 +1,6 @@
 "use strict";
 
-/* =========================================================
-   UTILITIES
-========================================================= */
+/* # INDICE */
 
 const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
@@ -107,7 +105,8 @@ function renderMarkdown(markdown) {
   const blocks = markdown
     .trim()
     .split(/\n{2,}/)
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((block) => !/^<!--[\s\S]*?-->$/.test(block.trim()));
 
   return blocks
     .map((block) => {
@@ -148,6 +147,36 @@ function renderMarkdown(markdown) {
     })
     .join("");
 }
+
+/* ## Manifesto */
+const heroManifest = document.querySelector("[data-hero-manifest]");
+
+async function loadHeroManifest() {
+  if (!heroManifest) {
+    return;
+  }
+
+  try {
+    const response = await fetch("assets/inicio/manifesto.md", {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error("Cannot load manifesto");
+    }
+
+    const markdown = await response.text();
+
+    heroManifest.innerHTML = renderMarkdown(markdown)
+      .replace("<h1>", "<h2>")
+      .replace("</h1>", "</h2>");
+    heroManifest.hidden = false;
+  } catch (error) {
+    console.error("Manifesto Markdown load failed:", error);
+  }
+}
+
+loadHeroManifest();
 
 
 /* =========================================================
@@ -531,9 +560,7 @@ if (
 }
 
 
-/* =========================================================
-   PROJECT SPECTRUM
-========================================================= */
+/* # PROYECTOS */
 
 let spectrumProjects = [];
 
@@ -541,6 +568,15 @@ const projectsManifestUrl = "assets/projects/projects.json";
 
 const spectrumContainer =
   document.querySelector("[data-project-spectrum]");
+
+const spectrumListView =
+  document.querySelector("[data-project-list-view]");
+
+const projectConstellation =
+  document.querySelector("[data-project-constellation]");
+
+const projectViewModeButtons =
+  document.querySelectorAll("[data-project-view-mode]");
 
 const spectrumReadoutNumber =
   document.querySelector("#spectrum-readout-number");
@@ -577,6 +613,142 @@ const projectDrawerCloseButtons =
 
 function formatSpectrumNumber(index) {
   return `W / ${String(index + 1).padStart(3, "0")}`;
+}
+
+function parseProjectDate(date) {
+  const match = String(date || "").match(/^(\d{2})\/(\d{4})$/);
+
+  if (!match) {
+    return null;
+  }
+
+  return new Date(Number(match[2]), Number(match[1]) - 1, 1);
+}
+
+function setProjectView(view) {
+  const showConstellation = view === "constellation";
+
+  if (spectrumListView) {
+    spectrumListView.hidden = showConstellation;
+  }
+
+  if (projectConstellation) {
+    projectConstellation.hidden = !showConstellation;
+  }
+
+  projectViewModeButtons.forEach((button) => {
+    const isActive = button.dataset.projectViewMode === view;
+
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (showConstellation && spectrumHud) {
+    spectrumHud.classList.remove("is-fixed");
+  } else {
+    updateSpectrumHudPosition();
+  }
+}
+
+/* ## Gráfico Constelación */
+function renderProjectConstellation() {
+  if (!projectConstellation) {
+    return;
+  }
+
+  const projectsWithDates = spectrumProjects
+    .map((project, index) => ({
+      project,
+      index,
+      date: parseProjectDate(project.date)
+    }))
+    .filter((item) => item.date);
+
+  const years = [...new Set(
+    projectsWithDates.map((item) => item.date.getFullYear())
+  )];
+
+  projectConstellation.innerHTML = `
+    <div class="project-constellation__chart">
+      <div class="project-constellation__y-axis" aria-hidden="true">
+        <span>100 / Software</span>
+        <span>0 / Arquitectura</span>
+      </div>
+      <div class="project-constellation__plot" data-project-constellation-plot></div>
+      <div class="project-constellation__x-axis" aria-hidden="true">
+        ${years.map((year) => `<span>${year}</span>`).join("")}
+      </div>
+    </div>
+    <aside class="project-constellation__readout" data-project-constellation-readout></aside>
+  `;
+
+  const plot = projectConstellation.querySelector(
+    "[data-project-constellation-plot]"
+  );
+
+  if (!plot || projectsWithDates.length === 0) {
+    return;
+  }
+
+  const timestamps = projectsWithDates.map((item) => item.date.getTime());
+  const start = Math.min(...timestamps);
+  const span = Math.max(Math.max(...timestamps) - start, 1);
+
+  const readout = projectConstellation.querySelector(
+    "[data-project-constellation-readout]"
+  );
+
+  function setConstellationReadout(project, index, point) {
+    const architecture = 100 - project.value;
+    const image = project.media.find((item) => item.type !== "video");
+
+    document.querySelectorAll(".project-constellation__point").forEach((item) => {
+      item.classList.toggle("is-active", item === point);
+    });
+
+    if (readout) {
+      readout.innerHTML = `
+        <p class="project-constellation__index">${escapeHTML(project.date)} / ${formatSpectrumNumber(index)}</p>
+        <h3>${escapeHTML(project.title)}</h3>
+        <div class="project-constellation__meta">
+          <span>${architecture}% arquitectura</span>
+          <span>${project.value}% software</span>
+          <span>${escapeHTML(project.category)}</span>
+        </div>
+        ${image ? `<img class="project-constellation__image" src="${escapeHTML(image.src)}" alt="${escapeHTML(image.alt)}">` : ""}
+        <p class="project-constellation__copy">${escapeHTML(project.text)}</p>
+      `;
+    }
+  }
+
+  projectsWithDates.forEach(({ project, index, date }, itemIndex) => {
+    const point = document.createElement("button");
+    const x = 8 + ((date.getTime() - start) / span) * 84;
+    const y = 8 + project.value / 100 * 84;
+
+    point.className = "project-constellation__point";
+    point.style.left = `${x}%`;
+    point.style.bottom = `${y}%`;
+    point.dataset.title = project.title;
+    point.setAttribute(
+      "aria-label",
+      `Abrir proyecto ${project.title}, ${project.date}`
+    );
+
+    point.addEventListener("click", () => {
+      setConstellationReadout(project, index, point);
+    });
+
+    point.addEventListener("dblclick", () => {
+      openProjectDrawer(project, index);
+    });
+
+    plot.appendChild(point);
+
+    if (itemIndex === 0) {
+      setConstellationReadout(project, index, point);
+    }
+  });
 }
 
 function setActiveSpectrumProject(project, index) {
@@ -638,12 +810,16 @@ function resetSpectrumProjectReadout() {
 }
 
 function normalizeProject(project) {
+  const date = project.date || "";
+  const yearFromDate = date.match(/^\d{2}\/(\d{4})$/);
+
   return {
     id: project.id || "",
     title: project.title || "Untitled project",
     value: Number(project.value || 0),
     category: project.category || project.type || "Project",
-    year: project.year || "",
+    date,
+    year: yearFromDate ? yearFromDate[1] : "",
     location: project.location || "",
     text: project.text || "",
     url: project.url || "",
@@ -785,12 +961,15 @@ function getProjectMediaToken(line, mediaById) {
 
 function renderProjectMarkdown(markdown, mediaById) {
   const blocks = String(markdown || "").trim().split(/\n{2,}/).filter(Boolean);
+  const visibleBlocks = blocks.filter(
+    (block) => !/^<!--[\s\S]*?-->$/.test(block.trim())
+  );
 
-  if (blocks.length === 0) {
+  if (visibleBlocks.length === 0) {
     return `<div class="project-drawer__empty">Este proyecto todavía no tiene contenido Markdown.</div>`;
   }
 
-  return blocks.map((block) => {
+  return visibleBlocks.map((block) => {
     const trimmedBlock = block.trim();
     const mediaTokens = trimmedBlock
       .split("\n")
@@ -896,6 +1075,123 @@ function closeProjectDrawer() {
   projectDrawer.setAttribute("aria-hidden", "true");
 }
 
+/* =========================================================
+   PROJECT IMAGE LIGHTBOX
+========================================================= */
+
+const projectLightbox = document.createElement("div");
+
+projectLightbox.className = "project-lightbox";
+projectLightbox.hidden = true;
+projectLightbox.setAttribute("role", "dialog");
+projectLightbox.setAttribute("aria-modal", "true");
+projectLightbox.setAttribute("aria-label", "Visor de imágenes del proyecto");
+projectLightbox.innerHTML = `
+  <button class="project-lightbox__close" type="button" aria-label="Cerrar imagen">×</button>
+  <button class="project-lightbox__nav project-lightbox__nav--previous" type="button" aria-label="Imagen anterior">←</button>
+  <figure class="project-lightbox__figure">
+    <img class="project-lightbox__image" alt="">
+    <figcaption class="project-lightbox__caption"></figcaption>
+  </figure>
+  <button class="project-lightbox__nav project-lightbox__nav--next" type="button" aria-label="Imagen siguiente">→</button>
+`;
+
+document.body.appendChild(projectLightbox);
+
+const projectLightboxImage = projectLightbox.querySelector(
+  ".project-lightbox__image"
+);
+const projectLightboxCaption = projectLightbox.querySelector(
+  ".project-lightbox__caption"
+);
+let projectLightboxItems = [];
+let projectLightboxIndex = 0;
+
+function setProjectLightboxImage(index) {
+  if (projectLightboxItems.length === 0) {
+    return;
+  }
+
+  projectLightboxIndex = (
+    index + projectLightboxItems.length
+  ) % projectLightboxItems.length;
+
+  const item = projectLightboxItems[projectLightboxIndex];
+
+  projectLightboxImage.src = item.src;
+  projectLightboxImage.alt = item.alt;
+  projectLightboxCaption.textContent = item.caption;
+}
+
+function openProjectLightbox(clickedImage) {
+  if (!projectDrawerBody) {
+    return;
+  }
+
+  const images = Array.from(
+    projectDrawerBody.querySelectorAll(".project-drawer__media-item img")
+  );
+
+  projectLightboxItems = images.map((image) => {
+    const caption = image.closest("figure")?.querySelector("figcaption");
+
+    return {
+      src: image.currentSrc || image.src,
+      alt: image.alt,
+      caption: caption ? caption.textContent.trim() : ""
+    };
+  });
+
+  const index = images.indexOf(clickedImage);
+
+  if (index === -1) {
+    return;
+  }
+
+  setProjectLightboxImage(index);
+  projectLightbox.hidden = false;
+  document.body.classList.add("project-lightbox-open");
+}
+
+function closeProjectLightbox() {
+  projectLightbox.hidden = true;
+  document.body.classList.remove("project-lightbox-open");
+}
+
+document.addEventListener("click", (event) => {
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const projectImage = target.closest(".project-drawer__media-item img");
+
+  if (projectImage instanceof HTMLImageElement) {
+    openProjectLightbox(projectImage);
+    return;
+  }
+
+  if (target === projectLightbox) {
+    closeProjectLightbox();
+    return;
+  }
+
+  if (target.closest(".project-lightbox__close")) {
+    closeProjectLightbox();
+    return;
+  }
+
+  if (target.closest(".project-lightbox__nav--previous")) {
+    setProjectLightboxImage(projectLightboxIndex - 1);
+    return;
+  }
+
+  if (target.closest(".project-lightbox__nav--next")) {
+    setProjectLightboxImage(projectLightboxIndex + 1);
+  }
+});
+
 function renderProjectSpectrum() {
   if (!spectrumContainer) {
     return;
@@ -986,6 +1282,7 @@ function renderProjectSpectrum() {
   });
 
   resetSpectrumProjectReadout();
+  renderProjectConstellation();
   updateSpectrumHudPosition();
 }
 
@@ -1070,11 +1367,33 @@ async function loadProjectSpectrum() {
 
 loadProjectSpectrum();
 
+projectViewModeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setProjectView(button.dataset.projectViewMode || "list");
+  });
+});
+
 projectDrawerCloseButtons.forEach((button) => {
   button.addEventListener("click", closeProjectDrawer);
 });
 
 document.addEventListener("keydown", (event) => {
+  if (!projectLightbox.hidden) {
+    if (event.key === "Escape") {
+      closeProjectLightbox();
+    }
+
+    if (event.key === "ArrowLeft") {
+      setProjectLightboxImage(projectLightboxIndex - 1);
+    }
+
+    if (event.key === "ArrowRight") {
+      setProjectLightboxImage(projectLightboxIndex + 1);
+    }
+
+    return;
+  }
+
   if (event.key === "Escape") {
     closeProjectDrawer();
   }
@@ -1124,9 +1443,7 @@ if (spectrumHud) {
 }
 
 
-/* =========================================================
-   REFLECTIONS MARKDOWN LOADER
-========================================================= */
+/* # PERSONAL */
 
 const reflectionsIndex =
   document.querySelector("[data-reflections-index]");

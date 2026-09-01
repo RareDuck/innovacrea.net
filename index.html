@@ -80,9 +80,7 @@
   </header>
 
   <main>
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
+    <!-- # INDICE -->
     <section class="hero section" id="inicio">
       <div class="hero-grid" aria-hidden="true"></div>
 
@@ -116,6 +114,9 @@
             <span>la <strong class="accent-blue"><em>potencia</em></strong></span>
           </p>
         </div>
+
+        <!-- ## Manifesto -->
+        <article class="hero-manifest reveal" data-hero-manifest hidden></article>
       </div>
 
       <div class="hero-diagram reveal" aria-hidden="true">
@@ -163,9 +164,7 @@
       </a>
     </section>
 
-    <!-- =========================================================
-         PROJECT SPECTRUM
-    ========================================================== -->
+    <!-- # PROYECTOS -->
     <section class="project-spectrum section" id="proyectos">
       <header class="section-heading section-heading--right reveal">
         <div class="section-heading__number">01</div>
@@ -178,10 +177,28 @@
           </h2>
         </div>
 
-        <p class="section-heading__description">
-          Una clasificación de trabajos y ejercicios según su disciplina
-          entre arquitectura y software.
-        </p>
+        <div class="project-view-control">
+          <p class="section-heading__description">
+            Una clasificación de trabajos y ejercicios según su disciplina
+            entre arquitectura y software.
+          </p>
+
+          <div class="project-view-mode" role="group" aria-label="Modo de vista">
+            <span>Modo de vista</span>
+            <button
+              class="project-view-mode__button is-active"
+              type="button"
+              data-project-view-mode="list"
+              aria-pressed="true"
+            >Lista</button>
+            <button
+              class="project-view-mode__button"
+              type="button"
+              data-project-view-mode="constellation"
+              aria-pressed="false"
+            >Constelación</button>
+          </div>
+        </div>
       </header>
 
       <div class="spectrum-layout">
@@ -193,6 +210,7 @@
         </aside>
 
         <div class="spectrum-board reveal">
+          <div class="spectrum-list-view" data-project-list-view>
           <div class="spectrum-header" aria-hidden="true">
             <span>ID</span>
             <span>Proyecto</span>
@@ -231,13 +249,20 @@
             data-project-spectrum
             aria-label="Lista de trabajos clasificados"
           ></section>
+          </div>
+
+          <!-- ## Gráfico Constelación -->
+          <section
+            class="project-constellation"
+            data-project-constellation
+            aria-label="Proyectos por fecha y disciplina"
+            hidden
+          ></section>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         PERSONAL
-    ========================================================== -->
+    <!-- # PERSONAL -->
     <section class="personal-section section" id="personal">
       <header class="section-heading reveal">
         <div class="section-heading__number">02</div>

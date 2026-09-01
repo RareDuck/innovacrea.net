@@ -1,0 +1,76 @@
+/* # PROYECTOS */
+:root {
+  --black:#090909;
+  --ink:#e9e7e1;
+  --muted:#8a8985;
+  --line:rgba(233,231,225,.22);
+  --red:#ef3b2d;
+  --grid:rgba(233,231,225,.08);
+}
+* { box-sizing:border-box; }
+body {
+  min-width:320px;
+  margin:0;
+  background:var(--black);
+  color:var(--ink);
+  font-family:Arial, Helvetica, sans-serif;
+}
+button { font:inherit; }
+.timeline-page { min-height:100svh; padding:clamp(22px, 4vw, 64px); }
+.masthead {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(250px, 32vw);
+  gap:32px;
+  padding-bottom:clamp(40px, 7vw, 96px);
+  border-bottom:1px solid var(--line);
+}
+.masthead__eyebrow {
+  grid-column:1 / -1;
+  margin:0;
+  color:var(--red);
+  font:15px/1 monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+h1,h2,p { margin-top:0; }
+h1 { margin-bottom:0; font-size:clamp(54px, 10vw, 168px); font-weight:400; letter-spacing:-.075em; line-height:.75; }
+h1 em { color:var(--red); font-family:Georgia, serif; font-weight:400; }
+.masthead__intro { align-self:end; max-width:420px; margin-bottom:0; color:var(--muted); font:clamp(17px, 1.7vw, 24px)/1.25 Georgia, serif; }
+/* ## Gráfico Constelación */
+.timeline-layout { display:grid; grid-template-columns:minmax(0, 60vw) minmax(260px, 1fr); gap:clamp(24px, 4vw, 68px); padding-top:clamp(32px, 5vw, 80px); }
+.timeline-chart { --plot-side:min(calc(60vw - 142px), 80svh); display:grid; grid-template-columns:142px var(--plot-side); grid-template-rows:auto 48px; min-width:0; }
+.timeline-chart__y-axis { display:flex; flex-direction:column; justify-content:space-between; padding:3px 18px 0 0; color:var(--muted); font:15px/1 monospace; letter-spacing:.06em; text-align:right; }
+.timeline-chart__plot { position:relative; min-width:0; aspect-ratio:1; border:1px solid var(--line); background:linear-gradient(90deg, rgba(239,59,45,.035), transparent 45%); }
+.timeline-chart__grid { position:absolute; inset:0; background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size:100% 25%, 25% 100%; }
+.timeline-chart__x-axis { grid-column:2; display:flex; justify-content:space-between; gap:12px; padding-top:15px; color:var(--muted); font:15px/1 monospace; letter-spacing:.06em; }
+.timeline-point {
+  position:absolute;
+  z-index:1;
+  width:18px;
+  height:18px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:var(--ink);
+  box-shadow:0 0 0 1px var(--black), 0 0 0 2px var(--ink);
+  cursor:pointer;
+  transform:translate(-50%, 50%);
+  transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.timeline-point:hover,.timeline-point:focus-visible,.timeline-point.is-active { background:var(--red); box-shadow:0 0 0 3px var(--black), 0 0 0 4px var(--red); outline:0; transform:translate(-50%, 50%) scale(1.4); }
+.timeline-point::after { content:attr(data-label); position:absolute; bottom:calc(100% + 13px); left:50%; width:max-content; max-width:160px; color:var(--ink); font:15px/1.1 monospace; letter-spacing:.04em; opacity:0; pointer-events:none; transform:translateX(-50%); transition:opacity .2s ease; }
+.timeline-point:hover::after,.timeline-point:focus-visible::after,.timeline-point.is-active::after { opacity:1; }
+.project-readout { min-height:240px; padding:24px; border-top:2px solid var(--red); background:#141414; }
+.project-readout__index { margin-bottom:30px; color:var(--red); font:15px/1 monospace; letter-spacing:.12em; }
+.project-readout h2 { font-size:clamp(28px, 3vw, 48px); font-weight:400; letter-spacing:-.055em; line-height:.95; }
+.project-readout p:last-child { margin-bottom:0; color:var(--muted); font:17px/1.3 Georgia, serif; }
+.project-readout__meta { display:flex; flex-wrap:wrap; gap:8px 14px; color:var(--muted); font:15px/1.2 monospace; letter-spacing:.06em; text-transform:uppercase; }
+.project-readout__image { width:100%; aspect-ratio:1; margin:18px 0; object-fit:cover; background:#090909; }
+.project-readout__copy { color:var(--muted); font:17px/1.3 Georgia, serif; }
+@media (max-width:800px) {
+  .masthead,.timeline-layout { grid-template-columns:1fr; }
+  .timeline-chart { --plot-side:min(calc(100vw - 120px), 80svh); grid-template-columns:84px var(--plot-side); grid-template-rows:auto 42px; }
+  .timeline-chart__y-axis { font-size:15px; padding-right:10px; }
+  .timeline-chart__x-axis { font-size:15px; }
+  .timeline-point::after { display:none; }
+}

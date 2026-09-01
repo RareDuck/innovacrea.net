@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proyectos — Cronología</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- # PROYECTOS -->
+    <main class="timeline-page">
+      <header class="masthead">
+        <p class="masthead__eyebrow">Borrador / Work index</p>
+        <h1>PROYECTOS<br><em>EN TIEMPO</em></h1>
+        <p class="masthead__intro">
+          Una lectura cronológica de los proyectos: el eje horizontal señala
+          cuándo se realizaron y el vertical su posición entre arquitectura y código.
+        </p>
+      </header>
+
+      <!-- ## Gráfico Constelación -->
+      <section class="timeline-layout" aria-label="Mapa cronológico de proyectos">
+        <div class="timeline-chart" data-timeline-chart>
+          <div class="timeline-chart__y-axis" aria-hidden="true">
+            <span>100 / PROGRAMACIÓN</span>
+            <span>50 / HÍBRIDO</span>
+            <span>0 / ARQUITECTURA</span>
+          </div>
+          <div class="timeline-chart__plot" data-timeline-plot>
+            <div class="timeline-chart__grid" aria-hidden="true"></div>
+          </div>
+          <div class="timeline-chart__x-axis" data-timeline-axis aria-hidden="true"></div>
+        </div>
+
+        <aside class="project-readout" data-project-readout aria-live="polite">
+          <p class="project-readout__index">SELECCIONA UN PROYECTO</p>
+          <h2>Mapa de trabajo</h2>
+          <p>Haz clic en un punto para ver su ficha resumida.</p>
+        </aside>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

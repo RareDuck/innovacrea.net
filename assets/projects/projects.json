@@ -1,10 +1,9 @@
 [
-  {
-    "id": "levels-house",
+  { "id": "levels-house",
     "title": "Levels House",
     "value": 0,
     "category": "Exercise",
-    "year": "2023",
+    "date": "12/2022",
     "location": "Academic work",
     "text": "Ejercicio académico de geometría descriptiva, planimetría y axonometría.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
@@ -20,12 +19,11 @@
       }
     ]
   },
-  {
-    "id": "descriptive-geometry",
-    "title": "Descriptive Geometry",
+  { "id": "descriptive-geometry",
+    "title": "Geometría Descriptiva",
     "value": 0,
     "category": "Exercise",
-    "year": "2023",
+    "date": "05/2023",
     "location": "Academic work",
     "text": "Ejercicio académico de intersecciones, proyecciones y superficies.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
@@ -41,12 +39,11 @@
       }
     ]
   },
-  {
-    "id": "ether-art-gallery",
+  { "id": "ether-art-gallery",
     "title": "Ether Art Gallery",
     "value": 0,
     "category": "Architecture",
-    "year": "2024",
+    "date": "06/2023",
     "location": "Academic work - No location",
     "text": "Proyecto arquitectónico centrado en transformación, recorrido y espacio expositivo.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
@@ -62,12 +59,11 @@
       }
     ]
   },
-  {
-    "id": "el-chiringuito-y-el-mar",
+  { "id": "el-chiringuito-y-el-mar",
     "title": "El Chiringuito y el Mar",
     "value": 5,
     "category": "Generative design",
-    "year": "2025",
+    "date": "12/2024",
     "location": "Academic work - Coast",
     "text": "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
     "url": "assets/web_documents/ARCHITECTURE_PORTFOLIO_ÁNGEL_YAGÜE.pdf",
@@ -83,12 +79,11 @@
       }
     ]
   },
-  {
-    "id": "laberinto-3d",
-    "title": "Laberínto Cúbico",
+  { "id": "laberinto-3d",
+    "title": "Laberinto Cúbico",
     "value": 90,
     "category": "Generative design",
-    "year": "2026",
+    "date": "07/2026",
     "location": "Personal work - Abstract",
     "text": "Laberinto tridimensional generado de forma procedural",
     "url": "https://github.com/RareDuck/cube_maze2",
@@ -108,7 +103,7 @@
     "title": "Aplicación de control urbanístico",
     "value": 60,
     "category": "Desktop Application - AI coded",
-    "year": "2026",
+    "date": "08/2026",
     "location": "Personal work - App",
     "text": "Aplicación de escritorio orientada al control urbanístico",
     "url": "",

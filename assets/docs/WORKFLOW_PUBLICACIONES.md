@@ -16,6 +16,8 @@ El JSON no contiene el texto largo ni `sections`. El campo `content` apunta al M
 3. Declara cada recurso en `media` con un `id` único, su `src`, `alt`, `type`, `size` y, opcionalmente, `caption` o `poster`.
 4. Copia `assets/docs/project-template.md` como `assets/projects/nombre-del-proyecto/content.md` y redacta ahí la ficha.
 
+Incluye `date` con el formato `MM/AAAA` (por ejemplo, `03/2026`). Se usa tanto para el año mostrado como para la vista cronológica experimental.
+
 ## Markdown y medios
 
 El archivo Markdown admite encabezados (`##`), párrafos, listas, citas, **negrita**, *cursiva*, `monospace` y enlaces externos.

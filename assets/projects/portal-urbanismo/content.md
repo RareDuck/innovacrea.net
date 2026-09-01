@@ -22,10 +22,9 @@ Para su uso se desarrollan archivos de cada municipio, a los que solo tendrían 
 {portal-mapa|large}
 
 
-La aplicación permite ver una ficha personalizada de cada parcela, con datos, anotaciones e imágenes incluidas además de atributos personalizados realizables (como por ejemplo, si esa parcela tiene una obra o no en curso) o incluso imágenes (especialmente útil en el caso de las IEE).
+La aplicación permite ver una ficha personalizada de cada parcela resumiendo todos su parámetros, pudiendose además añadir parámetros a las parcelas de todo el mapa de forma manual, además de fotos.
 
-Además, la app permite al usuario generar capas personalizadas representando visualmente distintos parámetros de las parcelas.
+Además, la app permite al usuario generar capas personalizadas representando visualmente cualquier parámetro de las parcelas.
 
 {portal-etiqueta|medium}
 {portal-capa|medium}
-

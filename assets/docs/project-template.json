@@ -3,7 +3,7 @@
   "title": "Nombre del Proyecto",
   "value": 0,
   "category": "Architecture / Software / Exercise",
-  "year": "2026",
+  "date": "03/2026",
   "location": "Ciudad / contexto / curso",
   "text": "Resumen corto del proyecto. Esto aparece en la barra inferior al hacer hover y al inicio del panel lateral.",
   "url": "assets/web_documents/documento-opcional.pdf",
