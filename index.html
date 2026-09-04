@@ -17,7 +17,7 @@
 
   <title>Ángel Yagüe — Architecture × Software</title>
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=geometry-svg-1">
 </head>
 
 <body>
@@ -188,15 +188,15 @@
             <button
               class="project-view-mode__button is-active"
               type="button"
-              data-project-view-mode="list"
+              data-project-view-mode="constellation"
               aria-pressed="true"
-            >Lista</button>
+            >Constelación</button>
             <button
               class="project-view-mode__button"
               type="button"
-              data-project-view-mode="constellation"
+              data-project-view-mode="list"
               aria-pressed="false"
-            >Constelación</button>
+            >Lista</button>
           </div>
         </div>
       </header>
@@ -210,7 +210,7 @@
         </aside>
 
         <div class="spectrum-board reveal">
-          <div class="spectrum-list-view" data-project-list-view>
+          <div class="spectrum-list-view" data-project-list-view hidden>
           <div class="spectrum-header" aria-hidden="true">
             <span>ID</span>
             <span>Proyecto</span>
@@ -256,7 +256,6 @@
             class="project-constellation"
             data-project-constellation
             aria-label="Proyectos por fecha y disciplina"
-            hidden
           ></section>
         </div>
       </div>
@@ -467,6 +466,6 @@
     <span>LOADING / DRAWING</span>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=geometry-svg-1"></script>
 </body>
 </html>

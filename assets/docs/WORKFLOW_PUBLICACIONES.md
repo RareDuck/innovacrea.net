@@ -37,6 +37,20 @@ El tamaño por defecto es el que tenga ese medio en el JSON. Puedes sobrescribir
 
 Se pueden escribir varios medios contiguos para mostrarlos en el mismo grupo. Si el id no existe en `media`, las llaves se muestran como texto normal; así se evitan medios rotos inesperados.
 
+También puedes integrar un PDF como una lámina dentro de la ficha usando `"type": "pdf"`:
+
+```json
+{
+  "id": "lamina1",
+  "type": "pdf",
+  "src": "assets/projects/mi-proyecto/media/lamina-01.pdf",
+  "alt": "Lámina del proyecto",
+  "size": "large"
+}
+```
+
+Después inclúyelo en el Markdown con `{lamina1}`. El PDF se muestra en un visor integrado y también ofrece un enlace para abrirlo aparte. Si quieres que aparezca como miniatura en la cronología, añade un `poster` con una imagen JPG, PNG o WebP de portada.
+
 ## Comprobación
 
 Sirve la web por HTTP, revisa que `projects.json` sea JSON válido, que cada `content` exista y que cada `{mediaid}` esté declarado dentro del `media` de ese mismo proyecto.

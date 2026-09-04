@@ -700,7 +700,9 @@ function renderProjectConstellation() {
 
   function setConstellationReadout(project, index, point) {
     const architecture = 100 - project.value;
-    const image = project.media.find((item) => item.type !== "video");
+    const preview = project.media.find(
+      (item) => item.type === "image" || item.poster
+    );
 
     document.querySelectorAll(".project-constellation__point").forEach((item) => {
       item.classList.toggle("is-active", item === point);
@@ -715,7 +717,7 @@ function renderProjectConstellation() {
           <span>${project.value}% software</span>
           <span>${escapeHTML(project.category)}</span>
         </div>
-        ${image ? `<img class="project-constellation__image" src="${escapeHTML(image.src)}" alt="${escapeHTML(image.alt)}">` : ""}
+        ${preview ? `<img class="project-constellation__image" src="${escapeHTML(preview.poster || preview.src)}" alt="${escapeHTML(preview.alt)}">` : ""}
         <p class="project-constellation__copy">${escapeHTML(project.text)}</p>
       `;
     }
@@ -900,8 +902,22 @@ function renderProjectMediaItem(item, sizeOverride = "") {
     `;
   }
 
+  if (type === "pdf") {
+    return `
+      <figure class="project-drawer__media-item project-drawer__media-item--pdf" style="--media-width:${escapeHTML(size)};--media-height:${escapeHTML(height)}">
+        <iframe
+          src="${escapeHTML(item.src || "")}"
+          title="${escapeHTML(item.alt || "Documento PDF")}"
+          loading="lazy"
+        ></iframe>
+        <a class="project-drawer__pdf-link" href="${escapeHTML(item.src || "")}" target="_blank" rel="noopener">Abrir PDF en una pestaña nueva</a>
+        ${caption}
+      </figure>
+    `;
+  }
+
   return `
-    <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)};--media-height:${escapeHTML(height)}">
+    <figure class="project-drawer__media-item" style="--media-width:${escapeHTML(size)}">
       <img
         src="${escapeHTML(item.src || "")}"
         alt="${escapeHTML(item.alt || "")}"

@@ -25,6 +25,14 @@
       "size": "large",
       "poster": "assets/projects/nombre-del-proyecto-en-minusculas/media/poster.jpg",
       "caption": "Pie de vídeo opcional."
+    },
+    {
+      "alt": "Descripción breve del documento PDF",
+      "id": "lamina1",
+      "type": "pdf",
+      "src": "assets/projects/nombre-del-proyecto-en-minusculas/media/lamina-01.pdf",
+      "size": "large",
+      "caption": "Lámina PDF integrada en la ficha."
     }
   ]
 }
