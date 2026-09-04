@@ -664,9 +664,29 @@ function renderProjectConstellation() {
     }))
     .filter((item) => item.date);
 
-  const years = [...new Set(
+  const projectYears = [...new Set(
     projectsWithDates.map((item) => item.date.getFullYear())
-  )];
+  )].sort((a, b) => a - b);
+  const timestamps = projectsWithDates.map((item) => item.date.getTime());
+  const start = Math.min(...timestamps);
+  const span = Math.max(Math.max(...timestamps) - start, 1);
+  const years = Array.from(
+    { length: projectYears[projectYears.length - 1] - projectYears[0] + 1 },
+    (_, index) => projectYears[0] + index
+  ).filter((year) => {
+    const yearStart = new Date(year, 0, 1).getTime();
+    return yearStart >= start && yearStart <= start + span;
+  });
+
+  function getConstellationX(date) {
+    return 8 + ((date.getTime() - start) / span) * 84;
+  }
+
+  const yearLabels = years.map((year) => {
+    const x = getConstellationX(new Date(year, 0, 1));
+
+    return `<span style="left:${x}%">${year}</span>`;
+  });
 
   projectConstellation.innerHTML = `
     <div class="project-constellation__chart">
@@ -676,7 +696,7 @@ function renderProjectConstellation() {
       </div>
       <div class="project-constellation__plot" data-project-constellation-plot></div>
       <div class="project-constellation__x-axis" aria-hidden="true">
-        ${years.map((year) => `<span>${year}</span>`).join("")}
+        ${yearLabels.join("")}
       </div>
     </div>
     <aside class="project-constellation__readout" data-project-constellation-readout></aside>
@@ -685,14 +705,26 @@ function renderProjectConstellation() {
   const plot = projectConstellation.querySelector(
     "[data-project-constellation-plot]"
   );
+  const xAxis = projectConstellation.querySelector(
+    ".project-constellation__x-axis"
+  );
 
   if (!plot || projectsWithDates.length === 0) {
     return;
   }
 
-  const timestamps = projectsWithDates.map((item) => item.date.getTime());
-  const start = Math.min(...timestamps);
-  const span = Math.max(Math.max(...timestamps) - start, 1);
+  if (xAxis) {
+    requestAnimationFrame(() => {
+      const axisBounds = xAxis.getBoundingClientRect();
+
+      xAxis.querySelectorAll("span").forEach((label) => {
+        const labelBounds = label.getBoundingClientRect();
+        label.hidden =
+          labelBounds.left < axisBounds.left ||
+          labelBounds.right > axisBounds.right;
+      });
+    });
+  }
 
   const readout = projectConstellation.querySelector(
     "[data-project-constellation-readout]"
@@ -725,7 +757,7 @@ function renderProjectConstellation() {
 
   projectsWithDates.forEach(({ project, index, date }, itemIndex) => {
     const point = document.createElement("button");
-    const x = 8 + ((date.getTime() - start) / span) * 84;
+    const x = getConstellationX(date);
     const y = 8 + project.value / 100 * 84;
 
     point.className = "project-constellation__point";
@@ -975,6 +1007,20 @@ function getProjectMediaToken(line, mediaById) {
   return { id: match[1], size: match[2] ? match[2].trim() : "" };
 }
 
+function getProjectMediaList(line, mediaById) {
+  const match = line.trim().match(/^\[(.+)\]$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const tokens = match[1]
+    .split(",")
+    .map((reference) => getProjectMediaToken(reference.trim(), mediaById));
+
+  return tokens.length > 0 && tokens.every(Boolean) ? tokens : null;
+}
+
 function renderProjectMarkdown(markdown, mediaById) {
   const blocks = String(markdown || "").trim().split(/\n{2,}/).filter(Boolean);
   const visibleBlocks = blocks.filter(
@@ -985,7 +1031,35 @@ function renderProjectMarkdown(markdown, mediaById) {
     return `<div class="project-drawer__empty">Este proyecto todavía no tiene contenido Markdown.</div>`;
   }
 
-  return visibleBlocks.map((block) => {
+  const contentBlocks = visibleBlocks.flatMap((block) => {
+    const separatedBlocks = [];
+    let textLines = [];
+
+    const addTextBlock = () => {
+      if (textLines.length > 0) {
+        separatedBlocks.push(textLines.join("\n"));
+        textLines = [];
+      }
+    };
+
+    block.split("\n").forEach((line) => {
+      if (
+        getProjectMediaToken(line, mediaById) ||
+        getProjectMediaList(line, mediaById)
+      ) {
+        addTextBlock();
+        separatedBlocks.push(line);
+        return;
+      }
+
+      textLines.push(line);
+    });
+
+    addTextBlock();
+    return separatedBlocks;
+  });
+
+  return contentBlocks.map((block) => {
     const trimmedBlock = block.trim();
     const mediaTokens = trimmedBlock
       .split("\n")
@@ -995,6 +1069,20 @@ function renderProjectMarkdown(markdown, mediaById) {
       return `<div class="project-drawer__media project-drawer__media--inline">${mediaTokens
         .map((token) => renderProjectMediaReference(token, mediaById))
         .join("")}</div>`;
+    }
+
+    const mediaLists = trimmedBlock
+      .split("\n")
+      .map((line) => getProjectMediaList(line, mediaById));
+
+    if (mediaLists.every(Boolean)) {
+      return mediaLists.map((mediaList) => `
+        <div class="project-drawer__media project-drawer__media--list">
+          ${mediaList
+            .map((token) => renderProjectMediaReference(token, mediaById, "full"))
+            .join("")}
+        </div>
+      `).join("");
     }
 
     if (/^#{1,3} /.test(trimmedBlock)) {

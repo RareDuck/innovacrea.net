@@ -250,7 +250,7 @@
     "value": 5,
     "category": "Architecture",
     "date": "12/2024",
-    "location": "Academic work - Coast",
+    "location": "Academic work - Riveira, Galicia",
     "text": "Proyecto de sistema modular, infraestructura flotante y relación con el paisaje.",
     "url": "assets/projects/el-chiringuito-y-el-mar/media/p4_final.pdf",
     "content": "assets/projects/el-chiringuito-y-el-mar/content.md",
@@ -261,8 +261,107 @@
         "src": "assets/projects/el-chiringuito-y-el-mar/media/portada.jpg",
         "size": "large",
         "caption": ""
+      },
+	  { "id" : "cat_1",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/cat_1.jpg",
+        "size": "large",
+        "caption": "Catálogo de despiece parte 1"
+      },
+	  { "id" : "cat_2",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/cat_2.jpg",
+        "size": "large",
+        "caption": "Catálogo de despieze parte 2"
+      },
+	  { "id" : "det_1",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/det_1.jpg",
+        "size": "large",
+        
+		"caption": "Detalle de despiece - pantalán contenedor"
+      },
+	  { "id" : "det_2",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/det_2.jpg",
+        "size": "large",
+        "caption": "Detalle de despiece - pieza de unión"
+      },
+	  { "id" : "det_3",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/det_3.jpg",
+        "size": "large",
+        "caption": "Detalle de despiece - pieza de parasol"
+      },
+	  { "id" : "det_2",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/det_2.jpg",
+        "size": "large",
+        "caption": "Detalle de despiece - pieza de unión"
+      },
+	  { "id" : "gui_1",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/gui_1.jpg",
+        "size": "large",
+        "caption": "Guía de montaje 1"
+      },
+	  { "id" : "gui_2",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/gui_2.jpg",
+        "size": "large",
+        "caption": "Guía de montaje 2"
+      },
+	  { "id" : "gui_3",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/gui_3.jpg",
+        "size": "large",
+        "caption": "Guía de montaje 3"
+      },
+	  { "id" : "planta_1",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/planta_1.jpg",
+        "size": "large",
+        "caption": "Distribución en planta 1"
+      },
+	  { "id" : "planta_2",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/planta_2.jpg",
+        "size": "large",
+        "caption": "Distribución en planta 2"
+      },
+	  { "id" : "situacion",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/situacion.jpg",
+        "size": "large",
+        "caption": "Plano de situacion del proyecto respecto a la costa"
+      },
+	  { "id" : "foto",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/foto.jpg",
+        "size": "large",
+        "caption": "Imágenes de la maqueta"
+      },
+	  { "id" : "collage",
+        "alt" : "Imagen del proyecto",
+        "type": "image",
+        "src": "assets/projects/el-chiringuito-y-el-mar/media/collage.jpg",
+        "size": "large",
+        "caption": "Collage sobre el entorno del proyecto"
       }
-    ]
+	]
   },
   { "id": "laberinto-3d",
     "title": "Laberinto Cúbico",
@@ -321,6 +420,30 @@
         "size": "medium",
         "caption": "Etiqueta pop-up resumen de la información del Palacio Ducal"
       }
+    ]
+  },
+  { "id": "42_piscine",
+    "title": "42 Madrid piscine",
+    "value": 100,
+    "category": "Code exercise",
+    "date": "07/2025",
+    "location": "42 Assignment",
+    "text": "Ejercicios realizados durante la piscina de julio de 2025 de 42 Madrid. ",
+    "url": "https://github.com/RareDuck/42/tree/main/piscina",
+    "content": "assets/projects/42_piscine/content.md",
+    "media": [
+    ]
+  },
+  { "id": "big_home",
+    "title": "Big Home",
+    "value": 40,
+    "category": "Academic work - Olmeda de Jadraque, Guadalajara",
+    "date": "05/2026",
+    "location": "42 Assignment",
+    "text": "Sistema modular adaptado al terreno de la parcela. Generación de distribuciones procedurales y especial atención al impacto paisajístico y cultural.",
+    "url": "assets/projects/big_home/p6_final.jpg",
+    "content": "assets/projects/big_home/content.md",
+    "media": [
     ]
   }
 ]

@@ -17,7 +17,7 @@
   --grid-line: rgba(255,255,255,.095);
   --grid: 80px;
   --page-padding: 64px;
-  --mono: "Bytebounce", "Courier New", monospace;
+  --mono: "Nimbus Mono PS", "Courier New", monospace;
   --serif: "Portfolio Times", "Times New Roman", serif;
   --sans: Arial, "Helvetica Neue", sans-serif;
 }
@@ -29,8 +29,10 @@
 }
 
 @font-face {
-  font-family: "Bytebounce";
-  src: url("assets/fonts/bytebounce.ttf") format("truetype");
+  font-family: "Nimbus Mono PS";
+  src: url("assets/fonts/nimbus-mono-ps.otf") format("opentype");
+  size-adjust: 93.33%;
+  line-gap-override: 0%;
   font-display: swap;
 }
 
@@ -446,35 +448,58 @@ main { position: relative; overflow: hidden; }
   min-width:0;
 }
 .project-constellation__y-axis {
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:4px 18px 0 0;
+  position:relative;
+  padding:0 18px 0 0;
   color:var(--grey);
   font:15px var(--mono);
   letter-spacing:.07em;
   text-align:right;
   text-transform:uppercase;
 }
+.project-constellation__y-axis span {
+  position:absolute;
+  right:18px;
+  white-space:nowrap;
+}
+.project-constellation__y-axis span:first-child {
+  top:8%;
+  transform:translateY(-50%);
+}
+.project-constellation__y-axis span:last-child {
+  bottom:8%;
+  transform:translateY(50%);
+}
 .project-constellation__plot {
   position:relative;
   min-width:0;
   aspect-ratio:1;
   border:1px solid var(--line);
-  background:linear-gradient(to right, rgba(228,11,0,.06), transparent 55%);
+}
+.project-constellation__plot::before {
+  content:"";
+  position:absolute;
+  top:8%;
+  right:0;
+  bottom:8%;
+  left:0;
+  background:linear-gradient(to right, rgba(228,11,0,.06), transparent 100%);
+  pointer-events:none;
 }
 .project-constellation__x-axis {
   grid-column:2;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
+  position:relative;
   padding-top:14px;
   color:var(--grey);
   font:15px var(--mono);
   letter-spacing:.07em;
 }
+.project-constellation__x-axis span {
+  position:absolute;
+  transform:translateX(-50%);
+}
 .project-constellation__point {
   position:absolute;
+  z-index:1;
   width:18px;
   height:18px;
   padding:0;
@@ -690,6 +715,14 @@ body.project-drawer-open .project-drawer-backdrop {
   justify-content:center;
   align-items:flex-start;
   margin:18px 0;
+}
+.project-drawer__media--list {
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  justify-items:stretch;
+  margin:18px 0;
+}
+.project-drawer__media--list .project-drawer__media-item {
+  width:100%;
 }
 .project-drawer__media-item {
   margin:0;
